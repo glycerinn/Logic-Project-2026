@@ -14,11 +14,10 @@ public class DropTile : MonoBehaviour, IDropHandler
         if (dropped == null) return;
         
         DraggableCard card = dropped.GetComponent<DraggableCard>();
-        if (card != null && card.isPlaced) return;
+        if (card == null) return;
         if (card != null)
         {
             card.wasDropped = true;
-            card.isPlaced = true;
         }
 
         // Let GridManager decide where it goes

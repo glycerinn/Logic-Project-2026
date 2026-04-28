@@ -8,6 +8,7 @@ public class DraggableCard : MonoBehaviour,
     private CanvasGroup canvasGroup;
     public Transform originalParent;
     public Vector2 originalPosition;
+    public Transform dragLayer;
 
     public bool isPlaced = false;
     public bool wasDropped = false;
@@ -20,11 +21,12 @@ public class DraggableCard : MonoBehaviour,
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-        if (isPlaced) return;
 
         originalParent = transform.parent;
         originalPosition = rectTransform.anchoredPosition;
         wasDropped = false;
+        
+        transform.SetParent(dragLayer, true);
 
         canvasGroup.blocksRaycasts = false;
         canvasGroup.alpha = 0.6f;

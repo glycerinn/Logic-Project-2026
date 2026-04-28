@@ -496,6 +496,7 @@ RectTransform:
   m_Children:
   - {fileID: 1762025874}
   - {fileID: 281403771}
+  - {fileID: 1597496403}
   - {fileID: 1899842818}
   - {fileID: 941152492}
   m_Father: {fileID: 0}
@@ -584,6 +585,41 @@ Transform:
   m_Children: []
   m_Father: {fileID: 697105322}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1597496402
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1597496403}
+  m_Layer: 5
+  m_Name: DragLayer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1597496403
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1597496402}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 697105322}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1762025873
 GameObject:
   m_ObjectHideFlags: 0
@@ -630,6 +666,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::GridManager
   tilePrefab: {fileID: 209395497632920896, guid: 15b95309cff21fe4f82c0b010b0307c2, type: 3}
   gridParent: {fileID: 281403771}
+  maxRowsBelow: 3
+  cleanupYThreshold: -1000
   width: 4
   visibleRows: 5
 --- !u!1 &1899842817
@@ -697,6 +735,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::DraggableCard
   originalParent: {fileID: 0}
   originalPosition: {x: 0, y: 0}
+  dragLayer: {fileID: 1597496403}
   isPlaced: 0
   wasDropped: 0
 --- !u!114 &1899842821
