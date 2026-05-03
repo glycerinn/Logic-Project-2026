@@ -7,10 +7,12 @@ public class GridManager : MonoBehaviour
 {
     public GameObject tilePrefab;
     public Transform gridParent;
+    public InventoryManager inventoryManager;
     private int activeRow = 0;
     private float cellHeight;
     public int maxRowsBelow = 3;
     public float cleanupYThreshold = -200f;
+    int totalRowsCreated = 0;
 
     public int width = 4;
     public int visibleRows = 5;
@@ -33,6 +35,7 @@ public class GridManager : MonoBehaviour
     void AddNewRow()
     {
         List<DropTile> newRow = new List<DropTile>();
+        int rowIndex = totalRowsCreated;
 
         for (int x = 0; x < width; x++)
         {
@@ -42,10 +45,18 @@ public class GridManager : MonoBehaviour
             tile.gridManager = this;
             tile.isLocked = true;
 
+            Image img = tileObj.GetComponent<Image>();
+            if (img != null)
+            {
+                bool isBlue = (rowIndex % 2) == 0;
+                img.color = isBlue ? Color.lightBlue : Color.white;
+            }
+
             newRow.Add(tile);
         }
 
         rows.Add(newRow);
+        totalRowsCreated++;
     }
 
     void RemoveBottomRow()
@@ -132,11 +143,21 @@ public class GridManager : MonoBehaviour
 
         if (rowIndex >= 1)
         {
-            ShiftGridDown();
+            yield return StartCoroutine(ShiftGridDownSmooth());
             CleanupRowsByPosition();
         }
 
-        
+        DropTile tile = chosenTile;
+
+        if (tile.hasItem && tile.tileImage != null)
+        {
+            inventoryManager.AddItem(tile.tileImage.sprite);
+
+            tile.hasItem = false;
+
+            // optional: hide tile image after collecting
+            tile.tileImage.enabled = false;
+        }
     }
 
     void UpdateActiveRow()
@@ -166,11 +187,24 @@ public class GridManager : MonoBehaviour
         }
     }
 
-    void ShiftGridDown()
+    IEnumerator ShiftGridDownSmooth()
     {
         RectTransform rect = gridParent.GetComponent<RectTransform>();
 
-        rect.anchoredPosition -= new Vector2(0, cellHeight);
+        Vector2 startPos = rect.anchoredPosition;
+        Vector2 targetPos = startPos - new Vector2(0, cellHeight);
+
+        float duration = 0.5f;
+        float elapsed = 0f;
+
+        while (elapsed < duration)
+        {
+            rect.anchoredPosition = Vector2.Lerp(startPos, targetPos, elapsed / duration);
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
+
+        rect.anchoredPosition = targetPos; // snap exactly at end
     }
 
     void EnsureRowsAhead(int currentRow)
