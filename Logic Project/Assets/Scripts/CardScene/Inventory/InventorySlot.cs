@@ -5,25 +5,24 @@ public class InventorySlot : MonoBehaviour
 {
     public Image icon;
 
-    void Awake()
+    public void SetItem(Image sourceImage)
     {
-        icon.enabled = false; // start empty
-    }
+        if (sourceImage == null)
+        {
+            Debug.LogWarning("Source image is NULL");
+            return;
+        }
 
-    public bool IsEmpty()
-    {
-        return !icon.enabled;
-    }
+        // Copy BOTH sprite and color
+        icon.sprite = sourceImage.sprite;
+        icon.color = sourceImage.color;
 
-    public void SetItem(Sprite sprite)
-    {
-        Debug.Log("Setting item: " + sprite);
+        // Prevent stretching
+        icon.preserveAspect = true;
 
-        icon.sprite = sprite;
-        icon.enabled = true;
-
+        // Reset transform (important for UI)
         icon.rectTransform.localScale = Vector3.one;
         icon.rectTransform.anchoredPosition = Vector2.zero;
-        icon.preserveAspect = true;
+        icon.rectTransform.rotation = Quaternion.identity;
     }
 }

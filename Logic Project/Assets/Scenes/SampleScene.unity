@@ -143,16 +143,16 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 281403770}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 697105322}
+  m_Father: {fileID: 1239704185}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.00015259, y: 123.219}
+  m_AnchoredPosition: {x: -0, y: 0.000030517578}
   m_SizeDelta: {x: 1920, y: 596.722}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &281403772
@@ -627,7 +627,7 @@ RectTransform:
   m_Children:
   - {fileID: 1183721578}
   - {fileID: 1762025874}
-  - {fileID: 281403771}
+  - {fileID: 1239704185}
   - {fileID: 1597496403}
   - {fileID: 1899842818}
   - {fileID: 941152492}
@@ -763,6 +763,42 @@ Transform:
   - {fileID: 611059199}
   m_Father: {fileID: 697105322}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1239704184
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1239704185}
+  m_Layer: 5
+  m_Name: GridRoot
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1239704185
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1239704184}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 281403771}
+  m_Father: {fileID: 697105322}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0.00018310547, y: 123.218994}
+  m_SizeDelta: {x: 1920, y: 596.722}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1597496402
 GameObject:
   m_ObjectHideFlags: 0
@@ -844,11 +880,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::GridManager
   tilePrefab: {fileID: 209395497632920896, guid: 15b95309cff21fe4f82c0b010b0307c2, type: 3}
   gridParent: {fileID: 281403771}
+  width: 4
+  visibleRows: 5
+  materialTiles:
+  - {fileID: 11400000, guid: a39e33cf13c18cc46a32c2531c9f0782, type: 2}
+  enemyTiles:
+  - {fileID: 11400000, guid: f5190b19f19540045b5735f3bcf7f30b, type: 2}
+  weaponTiles:
+  - {fileID: 11400000, guid: 61acb4afa3e9b284192395d4a8ead4a7, type: 2}
   inventoryManager: {fileID: 1183721577}
   maxRowsBelow: 3
   cleanupYThreshold: -1000
-  width: 4
-  visibleRows: 5
+  gridRoot: {fileID: 1239704184}
 --- !u!1 &1899842817
 GameObject:
   m_ObjectHideFlags: 0

@@ -2,23 +2,43 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GridManager : MonoBehaviour
 {
+    [Header("Grid Settings")]
     public GameObject tilePrefab;
     public Transform gridParent;
-    public InventoryManager inventoryManager;
-    private int activeRow = 0;
-    private float cellHeight;
-    public int maxRowsBelow = 3;
-    public float cleanupYThreshold = -200f;
-    int totalRowsCreated = 0;
-
+    public static GridManager Instance;
     public int width = 4;
     public int visibleRows = 5;
     int bufferRows = 3;
 
+    [Header("Tile Data")]
+    public TileData[] materialTiles;
+    public TileData[] enemyTiles;
+    public TileData[] weaponTiles;
+
+    [Header("System References")]
+    public InventoryManager inventoryManager;
+
+    [Header("Row Control")]
     private List<List<DropTile>> rows = new List<List<DropTile>>();
+    private int activeRow = 0;
+    int totalRowsCreated = 0;
+
+    [Header("Grid Movement")]
+    private float cellHeight;
+    public int maxRowsBelow = 3;
+    public float cleanupYThreshold = -200f;
+
+    [Header("References")]
+    public GameObject gridRoot;
+
+    void Awake()
+    {
+        Instance = this;
+    }
 
     void Start()
     {
@@ -28,6 +48,7 @@ public class GridManager : MonoBehaviour
         }
 
         UpdateActiveRow();
+
         GridLayoutGroup layout = gridParent.GetComponent<GridLayoutGroup>();
         cellHeight = layout.cellSize.y + layout.spacing.y;
     }
@@ -36,6 +57,7 @@ public class GridManager : MonoBehaviour
     {
         List<DropTile> newRow = new List<DropTile>();
         int rowIndex = totalRowsCreated;
+        TileType rowType = (TileType)Random.Range(0, 3);
 
         for (int x = 0; x < width; x++)
         {
@@ -45,12 +67,9 @@ public class GridManager : MonoBehaviour
             tile.gridManager = this;
             tile.isLocked = true;
 
-            Image img = tileObj.GetComponent<Image>();
-            if (img != null)
-            {
-                bool isBlue = (rowIndex % 2) == 0;
-                img.color = isBlue ? Color.lightBlue : Color.white;
-            }
+            TileData data = GetRandomTileFromType(rowType);
+            tile.tileData = data;
+            tile.ApplyVisuals();
 
             newRow.Add(tile);
         }
@@ -73,16 +92,56 @@ public class GridManager : MonoBehaviour
         rows.RemoveAt(0);
     }
 
+    TileData GetRandomTileFromType(TileType type)
+    {
+        switch (type)
+        {
+            case TileType.Material:
+                return materialTiles[Random.Range(0, materialTiles.Length)];
+            case TileType.Enemy:
+                return enemyTiles[Random.Range(0, enemyTiles.Length)];
+            case TileType.Weapon:
+                return weaponTiles[Random.Range(0, weaponTiles.Length)];
+        }
+
+        return null;
+    }
+
     public void OnTileChosen(DropTile chosenTile, GameObject cardObj)
     {
         LockRow(chosenTile);
         StartCoroutine(HandleMove(chosenTile, cardObj));
     }
 
+    public void ReturnFromBattle()
+    {
+        StartCoroutine(ReturnRoutine());
+    }
+
+    IEnumerator ReturnRoutine()
+    {
+        Debug.Log("GRID: Returning from battle");
+
+        // unload battle scene safely from HERE
+        yield return SceneManager.UnloadSceneAsync("Battle Scene");
+
+        Debug.Log("GRID: Battle unloaded");
+
+        gridRoot.SetActive(true);
+    }
+
+    IEnumerator EnterBattle()
+    {
+        gridRoot.SetActive(false);
+        AudioListener gridListener = Camera.main.GetComponent<AudioListener>();
+        if (gridListener != null)
+            gridListener.enabled = false;
+
+        yield return SceneManager.LoadSceneAsync("Battle Scene", LoadSceneMode.Additive);
+    }
+
     IEnumerator HandleMove(DropTile chosenTile, GameObject cardObj)
     {
-        
-        // find row + column
         int rowIndex = -1;
         int colIndex = -1;
 
@@ -103,16 +162,12 @@ public class GridManager : MonoBehaviour
 
         DropTile targetTile = rows[rowIndex][colIndex];
 
-        // hide card to prevent flicker
         CanvasGroup cg = cardObj.GetComponent<CanvasGroup>();
         if (cg != null) cg.alpha = 0f;
 
         LayoutRebuilder.ForceRebuildLayoutImmediate(gridParent.GetComponent<RectTransform>());
-
         yield return new WaitForEndOfFrame();
 
-        // move card ONLY once, cleanly
-        
         cardObj.transform.SetParent(targetTile.transform, false);
 
         RectTransform rect = cardObj.GetComponent<RectTransform>();
@@ -127,14 +182,12 @@ public class GridManager : MonoBehaviour
         {
             activeRow = rows.Count - 1;
         }
-        
-        // advance grid AFTER placement
+
         AddNewRow();
         UpdateActiveRow();
 
         yield return new WaitForEndOfFrame();
 
-        // show card again
         if (cg != null) cg.alpha = 1f;
 
         LayoutElement le = cardObj.GetComponent<LayoutElement>();
@@ -149,13 +202,16 @@ public class GridManager : MonoBehaviour
 
         DropTile tile = chosenTile;
 
+        if (tile.tileData.type == TileType.Enemy)
+        {
+            StartCoroutine(EnterBattle());
+            yield break; 
+        }
+
         if (tile.hasItem && tile.tileImage != null)
         {
-            inventoryManager.AddItem(tile.tileImage.sprite);
-
+            inventoryManager.AddItem(tile.tileImage);
             tile.hasItem = false;
-
-            // optional: hide tile image after collecting
             tile.tileImage.enabled = false;
         }
     }
@@ -179,11 +235,20 @@ public class GridManager : MonoBehaviour
             {
                 foreach (var tile in row)
                 {
-                    Debug.Log("Locking row");
                     tile.isLocked = true;
                 }
                 break;
             }
+        }
+    }
+
+    void EnsureRowsAhead(int currentRow)
+    {
+        int neededRows = currentRow + bufferRows + 1;
+
+        while (rows.Count < neededRows)
+        {
+            AddNewRow();
         }
     }
 
@@ -204,26 +269,14 @@ public class GridManager : MonoBehaviour
             yield return null;
         }
 
-        rect.anchoredPosition = targetPos; // snap exactly at end
+        rect.anchoredPosition = targetPos;
     }
-
-    void EnsureRowsAhead(int currentRow)
-    {
-        int neededRows = currentRow + bufferRows + 1;
-
-        while (rows.Count < neededRows)
-        {
-            AddNewRow();
-        }
-    }    
 
     void CleanupRowsByPosition()
     {
         RectTransform gridRect = gridParent.GetComponent<RectTransform>();
 
-        // how far we've moved down in "rows"
         float movedDistance = -gridRect.anchoredPosition.y;
-
         int rowsToRemove = Mathf.FloorToInt(movedDistance / cellHeight) - maxRowsBelow;
 
         if (rowsToRemove <= 0) return;
@@ -233,12 +286,9 @@ public class GridManager : MonoBehaviour
             if (rows.Count == 0) break;
 
             RemoveBottomRow();
-
-            // 🔥 FIX: keep activeRow in sync
             activeRow = Mathf.Max(0, activeRow - 1);
         }
 
-        // 🔥 reset grid position so it doesn't go infinitely down
         gridRect.anchoredPosition += new Vector2(0, rowsToRemove * cellHeight);
     }
 }

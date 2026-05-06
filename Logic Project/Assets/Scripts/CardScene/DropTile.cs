@@ -5,13 +5,24 @@ using UnityEngine.UI;
 public class DropTile : MonoBehaviour, IDropHandler
 {
     public GridManager gridManager;
+    public Image tileImage;
+    public TileData tileData;
+
+    public bool hasItem = true;
     public bool isLocked = false;
 
-    // The image shown on the tile
-    public Image tileImage;
+    void Start()
+    {
+        ApplyVisuals();
+    }
 
-    // Whether it still has an item
-    public bool hasItem = true;
+    public void ApplyVisuals()
+    {
+        if (tileData == null || tileImage == null) return;
+
+        tileImage.sprite = tileData.sprite;
+        tileImage.color = tileData.color;
+    }
 
     public void OnDrop(PointerEventData eventData)
     {

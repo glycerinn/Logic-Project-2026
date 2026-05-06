@@ -4,25 +4,23 @@ public class InventoryManager : MonoBehaviour
 {
     public InventorySlot[] slots;
 
+    private int currentIndex = 0;
+
     void Start()
     {
         slots = GetComponentsInChildren<InventorySlot>(true);
         Debug.Log("Slots found: " + slots.Length);
     }
 
-    public void AddItem(Sprite sprite)
+    public void AddItem(UnityEngine.UI.Image sourceImage)
     {
-        Debug.Log("AddItem called with sprite: " + sprite);
-
-        foreach (var slot in slots)
+        if (currentIndex >= slots.Length)
         {
-            if (slot.IsEmpty())
-            {
-                slot.SetItem(sprite);
-                return;
-            }
+            Debug.Log("Inventory full");
+            return;
         }
 
-        Debug.Log("Inventory full");
+        slots[currentIndex].SetItem(sourceImage);
+        currentIndex++;
     }
 }
