@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEngine.EventSystems;
 
 public class GridManager : MonoBehaviour
 {
@@ -34,6 +35,7 @@ public class GridManager : MonoBehaviour
 
     [Header("References")]
     public GameObject gridRoot;
+    public GameObject inventory;
 
     void Awake()
     {
@@ -56,7 +58,6 @@ public class GridManager : MonoBehaviour
     void AddNewRow()
     {
         List<DropTile> newRow = new List<DropTile>();
-        int rowIndex = totalRowsCreated;
         TileType rowType = (TileType)Random.Range(0, 3);
 
         for (int x = 0; x < width; x++)
@@ -122,20 +123,23 @@ public class GridManager : MonoBehaviour
     {
         Debug.Log("GRID: Returning from battle");
 
-        // unload battle scene safely from HERE
         yield return SceneManager.UnloadSceneAsync("Battle Scene");
 
         Debug.Log("GRID: Battle unloaded");
 
         gridRoot.SetActive(true);
+        inventory.SetActive(true);
     }
 
     IEnumerator EnterBattle()
     {
         gridRoot.SetActive(false);
+        inventory.SetActive(false);
         AudioListener gridListener = Camera.main.GetComponent<AudioListener>();
         if (gridListener != null)
+        {
             gridListener.enabled = false;
+        }
 
         yield return SceneManager.LoadSceneAsync("Battle Scene", LoadSceneMode.Additive);
     }
@@ -204,8 +208,10 @@ public class GridManager : MonoBehaviour
 
         if (tile.tileData.type == TileType.Enemy)
         {
+            BattleData.currentEnemy = tile.tileData;
+
             StartCoroutine(EnterBattle());
-            yield break; 
+            yield break;
         }
 
         if (tile.hasItem && tile.tileImage != null)

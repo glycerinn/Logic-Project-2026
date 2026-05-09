@@ -10,5 +10,7 @@ public class TileData : ScriptableObject
     public Sprite sprite;
     public Color color = Color.white;
 
-    public int value; // damage, heal, etc.
+    [Header("Enemy Stats")]
+    public int maxHP;
+    public int attack;
 }

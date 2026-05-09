@@ -1,3 +1,5 @@
+using Microsoft.Unity.VisualStudio.Editor;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class InventoryManager : MonoBehaviour
@@ -22,5 +24,10 @@ public class InventoryManager : MonoBehaviour
 
         slots[currentIndex].SetItem(sourceImage);
         currentIndex++;
+    }
+
+    public void RemoveItem()
+    {
+        slots[--currentIndex].RemoveItem();
     }
 }

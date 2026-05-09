@@ -119,6 +119,95 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &36647958
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 36647959}
+  - component: {fileID: 36647962}
+  - component: {fileID: 36647961}
+  - component: {fileID: 36647960}
+  m_Layer: 5
+  m_Name: Trash
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &36647959
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 36647958}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 697105322}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 810.6863, y: -293}
+  m_SizeDelta: {x: 174.824, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &36647960
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 36647958}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a693a6349dfebd429972d17875f2372, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TrashSlot
+  inventoryManager: {fileID: 1183721577}
+--- !u!114 &36647961
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 36647958}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.1415093, g: 0.950589, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &36647962
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 36647958}
+  m_CullTransparentMesh: 1
 --- !u!1 &281403770
 GameObject:
   m_ObjectHideFlags: 0
@@ -608,7 +697,7 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_VertexColorAlwaysGammaSpace: 0
-  m_AdditionalShaderChannelsFlag: 0
+  m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
   m_SortingOrder: 0
@@ -628,6 +717,7 @@ RectTransform:
   - {fileID: 1183721578}
   - {fileID: 1762025874}
   - {fileID: 1239704185}
+  - {fileID: 36647959}
   - {fileID: 1597496403}
   - {fileID: 1899842818}
   - {fileID: 941152492}
@@ -810,7 +900,7 @@ GameObject:
   - component: {fileID: 1597496403}
   m_Layer: 5
   m_Name: DragLayer
-  m_TagString: Untagged
+  m_TagString: DragLayer
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -884,14 +974,24 @@ MonoBehaviour:
   visibleRows: 5
   materialTiles:
   - {fileID: 11400000, guid: a39e33cf13c18cc46a32c2531c9f0782, type: 2}
+  - {fileID: 11400000, guid: c4da0f26ce51d5f4197938bcec2542aa, type: 2}
+  - {fileID: 11400000, guid: 830fcd2b3526b514b8e5d8d9d4c51818, type: 2}
+  - {fileID: 11400000, guid: 7e137381d53062b448ea5f19f10b4c7f, type: 2}
   enemyTiles:
   - {fileID: 11400000, guid: f5190b19f19540045b5735f3bcf7f30b, type: 2}
+  - {fileID: 11400000, guid: a61813f88064ac7418044364f7acc02b, type: 2}
+  - {fileID: 11400000, guid: 06ee78c2ae525d24eb907454c47033eb, type: 2}
+  - {fileID: 11400000, guid: 5d322adfd37500f41934a4b092035117, type: 2}
   weaponTiles:
   - {fileID: 11400000, guid: 61acb4afa3e9b284192395d4a8ead4a7, type: 2}
+  - {fileID: 11400000, guid: 2ebbe00f1c6092f4d8466dce3d197982, type: 2}
+  - {fileID: 11400000, guid: 6a887e5a6ff617944a996749d160bc1a, type: 2}
+  - {fileID: 11400000, guid: 09a6bbd4ecb33b24eb7bfdd1d4760421, type: 2}
   inventoryManager: {fileID: 1183721577}
   maxRowsBelow: 3
   cleanupYThreshold: -1000
   gridRoot: {fileID: 1239704184}
+  inventory: {fileID: 611059198}
 --- !u!1 &1899842817
 GameObject:
   m_ObjectHideFlags: 0

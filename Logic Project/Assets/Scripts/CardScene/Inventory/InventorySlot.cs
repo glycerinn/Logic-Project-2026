@@ -25,4 +25,18 @@ public class InventorySlot : MonoBehaviour
         icon.rectTransform.anchoredPosition = Vector2.zero;
         icon.rectTransform.rotation = Quaternion.identity;
     }
+
+    public void RemoveItem()
+    {
+        icon.sprite = null;
+        icon.color = Color.white;
+
+        // Prevent stretching
+        icon.preserveAspect = true;
+
+        // Reset transform (important for UI)
+        icon.rectTransform.localScale = Vector3.one;
+        icon.rectTransform.anchoredPosition = Vector2.zero;
+        icon.rectTransform.rotation = Quaternion.identity;
+    }
 }

@@ -17,15 +17,29 @@ public class BattleManager : MonoBehaviour
     bool isSelecting = false;
 
     int playerHP = 100;
-    int enemyHP = 50;
-
-    int enemyAttack = 8;
 
     bool playerTurn = true;
     bool battleEnded = false;
 
+    private TileData enemyData;
+
+    private int enemyHP;
+    private int enemyAttack;
+
     void Start()
     {
+        enemyData = BattleData.currentEnemy;
+
+        if (enemyData != null)
+        {
+            enemyImage.sprite = enemyData.sprite;
+
+            enemyHP = enemyData.maxHP;
+            enemyAttack = enemyData.attack;
+
+            Debug.Log("Fighting: " + enemyData.tileName);
+        }
+
         UpdateUI();
         resultText.text = "";
     }
