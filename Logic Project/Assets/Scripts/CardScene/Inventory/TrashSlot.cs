@@ -13,6 +13,6 @@ public class TrashSlot : MonoBehaviour, IDropHandler
         InventoryItem item = dropped.GetComponent<InventoryItem>();
         if (item == null) return;
 
-        inventoryManager.RemoveItem();
+        inventoryManager.RemoveItem(item.slotIndex);
     }
 }

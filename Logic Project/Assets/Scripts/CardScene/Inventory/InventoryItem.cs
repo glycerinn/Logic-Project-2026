@@ -13,6 +13,8 @@ public class InventoryItem : MonoBehaviour,
     public bool isPlaced = false;
     public bool wasDropped = false;
 
+    public int slotIndex;
+
     void Awake()
     {
         rectTransform = GetComponent<RectTransform>();

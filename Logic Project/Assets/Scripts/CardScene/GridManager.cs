@@ -36,6 +36,7 @@ public class GridManager : MonoBehaviour
     [Header("References")]
     public GameObject gridRoot;
     public GameObject inventory;
+    public GameObject trash;
 
     void Awake()
     {
@@ -129,12 +130,14 @@ public class GridManager : MonoBehaviour
 
         gridRoot.SetActive(true);
         inventory.SetActive(true);
+        trash.SetActive(true);
     }
 
     IEnumerator EnterBattle()
     {
         gridRoot.SetActive(false);
         inventory.SetActive(false);
+        trash.SetActive(false);
         AudioListener gridListener = Camera.main.GetComponent<AudioListener>();
         if (gridListener != null)
         {

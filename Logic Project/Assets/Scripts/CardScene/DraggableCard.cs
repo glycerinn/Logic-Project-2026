@@ -41,6 +41,7 @@ public class DraggableCard : MonoBehaviour,
     {
         canvasGroup.blocksRaycasts = true;
         canvasGroup.alpha = 1f;
+        rectTransform.rotation = Quaternion.identity;
 
         if (isPlaced)
         {

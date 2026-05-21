@@ -13,4 +13,8 @@ public class TileData : ScriptableObject
     [Header("Enemy Stats")]
     public int maxHP;
     public int attack;
+
+    [Header("Weapon Stats")]
+    public int damage;
+    public int durability;
 }

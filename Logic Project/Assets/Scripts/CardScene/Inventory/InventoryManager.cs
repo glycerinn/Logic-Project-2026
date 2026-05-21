@@ -8,6 +8,7 @@ public class InventoryManager : MonoBehaviour
 
     private int currentIndex = 0;
 
+
     void Start()
     {
         slots = GetComponentsInChildren<InventorySlot>(true);
@@ -23,11 +24,26 @@ public class InventoryManager : MonoBehaviour
         }
 
         slots[currentIndex].SetItem(sourceImage);
+        
         currentIndex++;
     }
 
-    public void RemoveItem()
+    public void RemoveItem(int index)
     {
-        slots[--currentIndex].RemoveItem();
+        if(index < 0 || index >= currentIndex)
+        {
+            return;
+        }
+
+        for(int i = 0; i < currentIndex - 1; i++)
+        {
+            slots[i].item.slotIndex = i;
+            slots[i].icon.sprite = slots[i+1].icon.sprite;
+            slots[i].icon.color = slots[i+1].icon.color;
+
+        }
+
+        slots[currentIndex - 1].RemoveItem();    
+        currentIndex--;   
     }
 }
