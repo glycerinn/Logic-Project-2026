@@ -8,23 +8,23 @@ public class InventoryManager : MonoBehaviour
 
     private int currentIndex = 0;
 
-
     void Start()
     {
         slots = GetComponentsInChildren<InventorySlot>(true);
+        for (int i = 0; i < slots.Length; i++)
+        {
+            slots[i].slotIndex = i;
+        }
         Debug.Log("Slots found: " + slots.Length);
     }
 
-    public void AddItem(UnityEngine.UI.Image sourceImage)
+    public void AddItem(ItemData item)
     {
         if (currentIndex >= slots.Length)
-        {
-            Debug.Log("Inventory full");
             return;
-        }
 
-        slots[currentIndex].SetItem(sourceImage);
-        
+        slots[currentIndex].SetItem(item);
+
         currentIndex++;
     }
 
@@ -35,15 +35,27 @@ public class InventoryManager : MonoBehaviour
             return;
         }
 
-        for(int i = 0; i < currentIndex - 1; i++)
+        for(int i = index; i < currentIndex - 1; i++)
         {
-            slots[i].item.slotIndex = i;
-            slots[i].icon.sprite = slots[i+1].icon.sprite;
-            slots[i].icon.color = slots[i+1].icon.color;
-
+            slots[i].icon.sprite = slots[i + 1].icon.sprite;
+            slots[i].icon.color = slots[i + 1].icon.color;
         }
 
         slots[currentIndex - 1].RemoveItem();    
         currentIndex--;   
     }
+
+    public void RemoveItemByData(ItemData item)
+    {
+        for (int i = 0; i < currentIndex; i++)
+        {
+            if (slots[i].currentItem == item)
+            {
+                RemoveItem(i);
+                return;
+            }
+        }
+    }
+
+    
 }

@@ -1,5 +1,12 @@
 using UnityEngine;
 
+public enum TileType
+{
+    Material,
+    Enemy,
+    Weapon
+}
+
 [CreateAssetMenu(fileName = "Tile", menuName = "Game/Tile")]
 public class TileData : ScriptableObject
 {
@@ -14,7 +21,5 @@ public class TileData : ScriptableObject
     public int maxHP;
     public int attack;
 
-    [Header("Weapon Stats")]
-    public int damage;
-    public int durability;
+    public ItemData itemReward;
 }

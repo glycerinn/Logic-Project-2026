@@ -6,27 +6,30 @@ public class InventorySlot : MonoBehaviour
     public Image icon;
     public InventoryItem item;
 
-    public void Awake()
+    public ItemData currentItem;
+
+    public int slotIndex;
+
+    void Awake()
     {
         item = GetComponentInChildren<InventoryItem>();
     }
 
-    public void SetItem(Image sourceImage)
+    public void SetItem(ItemData itemData)
     {
-        if (sourceImage == null)
+        if (itemData == null)
         {
-            Debug.LogWarning("Source image is NULL");
+            Debug.LogWarning("ItemData is NULL");
             return;
         }
 
-        // Copy BOTH sprite and color
-        icon.sprite = sourceImage.sprite;
-        icon.color = sourceImage.color;
+        currentItem = itemData;
 
-        // Prevent stretching
+        icon.enabled = true;
+        icon.sprite = itemData.icon;
+
         icon.preserveAspect = true;
 
-        // Reset transform (important for UI)
         icon.rectTransform.localScale = Vector3.one;
         icon.rectTransform.anchoredPosition = Vector2.zero;
         icon.rectTransform.rotation = Quaternion.identity;
@@ -34,30 +37,28 @@ public class InventorySlot : MonoBehaviour
 
     public void RemoveItem()
     {
+        currentItem = null;
+
         icon.sprite = null;
+        icon.enabled = false;
         icon.color = Color.white;
 
-        // Prevent stretching
-        icon.preserveAspect = true;
-
-        // Reset transform (important for UI)
         icon.rectTransform.localScale = Vector3.one;
         icon.rectTransform.anchoredPosition = Vector2.zero;
         icon.rectTransform.rotation = Quaternion.identity;
     }
 
-    public bool isEmpty()
+    public bool IsEmpty()
     {
-        return icon.sprite == null;
+        return currentItem == null;
     }
 
-    public Sprite GetSprite()
+    public void CopyFrom(InventorySlot other)
     {
-        return icon.sprite;
-    }
+        currentItem = other.currentItem;
 
-    public Color GetColor()
-    {
-        return icon.color;
+        icon.sprite = other.icon.sprite;
+        icon.color = other.icon.color;
+        icon.enabled = other.icon.enabled;
     }
 }

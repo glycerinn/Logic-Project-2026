@@ -3,41 +3,39 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
-using UnityEngine.EventSystems;
 
 public class GridManager : MonoBehaviour
 {
-    [Header("Grid Settings")]
+    public static GridManager Instance;
+
+    [Header("Grid")]
     public GameObject tilePrefab;
     public Transform gridParent;
-    public static GridManager Instance;
+
     public int width = 4;
-    public int visibleRows = 5;
-    int bufferRows = 3;
+    public int visibleColumns = 6;
+    public int maxColumnsLeft = 2;
 
     [Header("Tile Data")]
     public TileData[] materialTiles;
     public TileData[] enemyTiles;
     public TileData[] weaponTiles;
 
-    [Header("System References")]
-    public InventoryManager inventoryManager;
-
-    [Header("Row Control")]
-    private List<List<DropTile>> rows = new List<List<DropTile>>();
-    private int activeRow = 0;
-    int totalRowsCreated = 0;
-
-    [Header("Grid Movement")]
-    private float cellHeight;
-    public int maxRowsBelow = 3;
-    public float cleanupYThreshold = -200f;
+    [Header("Movement")]
+    public float moveSpeed = 12f;
 
     [Header("References")]
+    public InventoryManager inventoryManager;
+
     public GameObject gridRoot;
     public GameObject inventory;
     public GameObject trash;
 
+    private List<List<DropTile>> columns = new List<List<DropTile>>();
+    private int activeColumn = 0;
+    private float cellWidth;
+
+    // SETUP
     void Awake()
     {
         Instance = this;
@@ -45,54 +43,72 @@ public class GridManager : MonoBehaviour
 
     void Start()
     {
-        for (int i = 0; i < visibleRows; i++)
+        GridLayoutGroup layout = gridParent.GetComponent<GridLayoutGroup>();
+        cellWidth = layout.cellSize.x + layout.spacing.x;
+
+        for (int i = 0; i < visibleColumns; i++)
         {
-            AddNewRow();
+            CreateColumn();
         }
 
-        UpdateActiveRow();
-
-        GridLayoutGroup layout = gridParent.GetComponent<GridLayoutGroup>();
-        cellHeight = layout.cellSize.y + layout.spacing.y;
+        UpdateActiveColumn();
     }
 
-    void AddNewRow()
-    {
-        List<DropTile> newRow = new List<DropTile>();
-        TileType rowType = (TileType)Random.Range(0, 3);
+    // CREATE COLUMN
 
-        for (int x = 0; x < width; x++)
+    void CreateColumn()
+    {
+        List<DropTile> newColumn = new List<DropTile>();
+        TileType columnType = (TileType)Random.Range(0, 3);
+
+        for (int y = 0; y < width; y++)
         {
             GameObject tileObj = Instantiate(tilePrefab, gridParent);
-
             DropTile tile = tileObj.GetComponent<DropTile>();
+
             tile.gridManager = this;
             tile.isLocked = true;
 
-            TileData data = GetRandomTileFromType(rowType);
+            TileData data = GetRandomTileFromType(columnType);
+
             tile.tileData = data;
             tile.ApplyVisuals();
-
-            newRow.Add(tile);
+            newColumn.Add(tile);
         }
 
-        rows.Add(newRow);
-        totalRowsCreated++;
+        columns.Add(newColumn);
     }
 
-    void RemoveBottomRow()
+    // RECYCLE COLUMN
+
+    void RecycleLeftColumn()
     {
-        if (rows.Count == 0) return;
+        List<DropTile> recycledColumn = columns[0];
 
-        List<DropTile> bottomRow = rows[0];
+        columns.RemoveAt(0);
+        TileType columnType = (TileType)Random.Range(0, 3);
 
-        foreach (var tile in bottomRow)
+        foreach (DropTile tile in recycledColumn)
         {
-            Destroy(tile.gameObject);
+            // move tile to end of hierarchy
+            tile.transform.SetAsLastSibling();
+
+            TileData data = GetRandomTileFromType(columnType);
+
+            tile.tileData = data;
+            tile.hasItem = true;
+            tile.ApplyVisuals();
+
+            if (tile.tileImage != null)
+            {
+                tile.tileImage.enabled = true;
+            }
         }
 
-        rows.RemoveAt(0);
+        columns.Add(recycledColumn);
     }
+
+    // TILE DATA
 
     TileData GetRandomTileFromType(TileType type)
     {
@@ -109,10 +125,154 @@ public class GridManager : MonoBehaviour
         return null;
     }
 
+    // PLAYER MOVE
+
     public void OnTileChosen(DropTile chosenTile, GameObject cardObj)
     {
-        LockRow(chosenTile);
-        StartCoroutine(HandleMove(chosenTile, cardObj));
+        LockColumn(chosenTile);
+
+        StartCoroutine(
+            HandleMove(chosenTile, cardObj)
+        );
+    }
+
+    IEnumerator HandleMove(DropTile chosenTile, GameObject cardObj)
+    {
+        int columnIndex = -1;
+        int rowIndex = -1;
+
+        // find tile position
+        for (int x = 0; x < columns.Count; x++)
+        {
+            int y = columns[x].IndexOf(chosenTile);
+
+            if (y != -1)
+            {
+                columnIndex = x;
+                rowIndex = y;
+                break;
+            }
+        }
+
+        if (columnIndex == -1)
+            yield break;
+
+        DropTile targetTile = columns[columnIndex][rowIndex];
+
+        // move player card into tile
+        cardObj.transform.SetParent(targetTile.transform, false);
+
+        RectTransform cardRect = cardObj.GetComponent<RectTransform>();
+        cardRect.anchorMin = new Vector2(0.5f, 0.5f);
+        cardRect.anchorMax = new Vector2(0.5f, 0.5f);
+
+        cardRect.pivot = new Vector2(0.5f, 0.5f);
+        cardRect.anchoredPosition = Vector2.zero;
+        cardRect.localScale = Vector3.one;
+
+        activeColumn++;
+
+        UpdateActiveColumn();
+
+        // SMOOTH SHIFT
+
+        RectTransform gridRect = gridParent.GetComponent<RectTransform>();
+        Vector2 startPos = gridRect.anchoredPosition;
+        Vector2 targetPos = startPos - new Vector2(cellWidth, 0);
+
+        while (Vector2.Distance(gridRect.anchoredPosition, targetPos) > 0.1f)
+        {
+            gridRect.anchoredPosition = Vector2.Lerp(
+                    gridRect.anchoredPosition,
+                    targetPos,
+                    moveSpeed * Time.deltaTime
+                );
+
+            yield return null;
+        }
+
+        gridRect.anchoredPosition = targetPos;
+
+        CleanupColumns();
+
+        //==================================================
+        // INVENTORY
+        //==================================================
+
+        if (chosenTile.hasItem && chosenTile.tileData.itemReward != null)
+        {
+            inventoryManager.AddItem(chosenTile.tileData.itemReward);
+
+            chosenTile.hasItem = false;
+
+            if (chosenTile.tileImage != null)
+            {
+                chosenTile.tileImage.enabled = false;
+            }
+        }
+
+        // BATTLE
+        if (chosenTile.tileData.type == TileType.Enemy)
+        {
+            BattleData.currentEnemy = chosenTile.tileData;
+
+            StartCoroutine(EnterBattle());
+        }
+    }
+
+    // CLEANUP
+
+    void CleanupColumns()
+    {
+        if (activeColumn > maxColumnsLeft)
+        {
+            RecycleLeftColumn();
+            activeColumn--;
+
+            RectTransform gridRect = gridParent.GetComponent<RectTransform>();
+            gridRect.anchoredPosition += new Vector2(cellWidth, 0);
+        }
+    }
+
+    // ACTIVE COLUMN
+
+    void UpdateActiveColumn()
+    {
+        for (int x = 0; x < columns.Count; x++)
+        {
+            foreach (DropTile tile in columns[x])
+            {
+                tile.isLocked =
+                    (x != activeColumn);
+            }
+        }
+    }
+
+    void LockColumn(DropTile chosenTile)
+    {
+        foreach (var column in columns)
+        {
+            if (column.Contains(chosenTile))
+            {
+                foreach (var tile in column)
+                {
+                    tile.isLocked = true;
+                }
+
+                break;
+            }
+        }
+    }
+
+    // BATTLE
+
+    IEnumerator EnterBattle()
+    {
+        gridRoot.SetActive(false);
+        inventory.SetActive(false);
+        trash.SetActive(false);
+
+        yield return SceneManager.LoadSceneAsync("Battle Scene", LoadSceneMode.Additive);
     }
 
     public void ReturnFromBattle()
@@ -122,182 +282,23 @@ public class GridManager : MonoBehaviour
 
     IEnumerator ReturnRoutine()
     {
-        Debug.Log("GRID: Returning from battle");
-
         yield return SceneManager.UnloadSceneAsync("Battle Scene");
-
-        Debug.Log("GRID: Battle unloaded");
 
         gridRoot.SetActive(true);
         inventory.SetActive(true);
         trash.SetActive(true);
-    }
 
-    IEnumerator EnterBattle()
-    {
-        gridRoot.SetActive(false);
-        inventory.SetActive(false);
-        trash.SetActive(false);
-        AudioListener gridListener = Camera.main.GetComponent<AudioListener>();
-        if (gridListener != null)
+        InventoryItem player = FindFirstObjectByType<InventoryItem>();
+
+        if (player != null)
         {
-            gridListener.enabled = false;
-        }
+            CanvasGroup cg = player.GetComponent<CanvasGroup>();
 
-        yield return SceneManager.LoadSceneAsync("Battle Scene", LoadSceneMode.Additive);
-    }
-
-    IEnumerator HandleMove(DropTile chosenTile, GameObject cardObj)
-    {
-        int rowIndex = -1;
-        int colIndex = -1;
-
-        for (int i = 0; i < rows.Count; i++)
-        {
-            int index = rows[i].IndexOf(chosenTile);
-            if (index != -1)
+            if (cg != null)
             {
-                rowIndex = i;
-                colIndex = index;
-                break;
+                cg.blocksRaycasts = true;
+                cg.alpha = 1f;
             }
         }
-
-        if (rowIndex == -1) yield break;
-
-        EnsureRowsAhead(rowIndex);
-
-        DropTile targetTile = rows[rowIndex][colIndex];
-
-        CanvasGroup cg = cardObj.GetComponent<CanvasGroup>();
-        if (cg != null) cg.alpha = 0f;
-
-        LayoutRebuilder.ForceRebuildLayoutImmediate(gridParent.GetComponent<RectTransform>());
-        yield return new WaitForEndOfFrame();
-
-        cardObj.transform.SetParent(targetTile.transform, false);
-
-        RectTransform rect = cardObj.GetComponent<RectTransform>();
-        rect.anchorMin = new Vector2(0.5f, 0.5f);
-        rect.anchorMax = new Vector2(0.5f, 0.5f);
-        rect.pivot = new Vector2(0.5f, 0.5f);
-        rect.anchoredPosition = Vector2.zero;
-        rect.localScale = Vector3.one;
-
-        activeRow++;
-        if (activeRow >= rows.Count)
-        {
-            activeRow = rows.Count - 1;
-        }
-
-        AddNewRow();
-        UpdateActiveRow();
-
-        yield return new WaitForEndOfFrame();
-
-        if (cg != null) cg.alpha = 1f;
-
-        LayoutElement le = cardObj.GetComponent<LayoutElement>();
-        if (le == null) le = cardObj.AddComponent<LayoutElement>();
-        le.ignoreLayout = true;
-
-        if (rowIndex >= 1)
-        {
-            yield return StartCoroutine(ShiftGridDownSmooth());
-            CleanupRowsByPosition();
-        }
-
-        DropTile tile = chosenTile;
-
-        if (tile.tileData.type == TileType.Enemy)
-        {
-            BattleData.currentEnemy = tile.tileData;
-
-            StartCoroutine(EnterBattle());
-            yield break;
-        }
-
-        if (tile.hasItem && tile.tileImage != null)
-        {
-            inventoryManager.AddItem(tile.tileImage);
-            tile.hasItem = false;
-            tile.tileImage.enabled = false;
-        }
-    }
-
-    void UpdateActiveRow()
-    {
-        for (int i = 0; i < rows.Count; i++)
-        {
-            foreach (var tile in rows[i])
-            {
-                tile.isLocked = (i != activeRow);
-            }
-        }
-    }
-
-    void LockRow(DropTile chosenTile)
-    {
-        foreach (var row in rows)
-        {
-            if (row.Contains(chosenTile))
-            {
-                foreach (var tile in row)
-                {
-                    tile.isLocked = true;
-                }
-                break;
-            }
-        }
-    }
-
-    void EnsureRowsAhead(int currentRow)
-    {
-        int neededRows = currentRow + bufferRows + 1;
-
-        while (rows.Count < neededRows)
-        {
-            AddNewRow();
-        }
-    }
-
-    IEnumerator ShiftGridDownSmooth()
-    {
-        RectTransform rect = gridParent.GetComponent<RectTransform>();
-
-        Vector2 startPos = rect.anchoredPosition;
-        Vector2 targetPos = startPos - new Vector2(0, cellHeight);
-
-        float duration = 0.5f;
-        float elapsed = 0f;
-
-        while (elapsed < duration)
-        {
-            rect.anchoredPosition = Vector2.Lerp(startPos, targetPos, elapsed / duration);
-            elapsed += Time.deltaTime;
-            yield return null;
-        }
-
-        rect.anchoredPosition = targetPos;
-    }
-
-    void CleanupRowsByPosition()
-    {
-        RectTransform gridRect = gridParent.GetComponent<RectTransform>();
-
-        float movedDistance = -gridRect.anchoredPosition.y;
-        int rowsToRemove = Mathf.FloorToInt(movedDistance / cellHeight) - maxRowsBelow;
-
-        if (rowsToRemove <= 0) return;
-
-        for (int i = 0; i < rowsToRemove; i++)
-        {
-            if (rows.Count == 0) break;
-
-            RemoveBottomRow();
-            activeRow = Mathf.Max(0, activeRow - 1);
-        }
-
-        gridRect.anchoredPosition += new Vector2(0, rowsToRemove * cellHeight);
     }
 }

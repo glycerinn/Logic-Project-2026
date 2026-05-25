@@ -10,10 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8ffb03933c9ae5b4e81932d5d97493f6, type: 3}
-  m_Name: Weapon3
+  m_Name: Material4
   m_EditorClassIdentifier: Assembly-CSharp::TileData
-  tileName: Weapon2
-  type: 2
-  sprite: {fileID: 8957324059118975939, guid: cba717240672eed4cbcc05d152946fce, type: 3}
+  tileName: Material4
+  type: 0
+  sprite: {fileID: 5962689061485224524, guid: 410ae01b7b1298c4694002733fe89e6a, type: 3}
   color: {r: 1, g: 1, b: 1, a: 1}
-  damage: 0
+  maxHP: 0
+  attack: 0
+  itemReward: {fileID: 11400000, guid: f8eca15ed4d93fb41bef2884848961f9, type: 2}

@@ -9,11 +9,10 @@ public class InventoryItem : MonoBehaviour,
     public Transform originalParent;
     public Vector2 originalPosition;
     public Transform dragLayer;
+    public InventorySlot currentSlot;
 
     public bool isPlaced = false;
     public bool wasDropped = false;
-
-    public int slotIndex;
 
     void Awake()
     {
@@ -24,12 +23,15 @@ public class InventoryItem : MonoBehaviour,
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-
+        currentSlot = GetComponentInParent<InventorySlot>();
         originalParent = transform.parent;
         originalPosition = rectTransform.anchoredPosition;
         wasDropped = false;
         
-        transform.SetParent(dragLayer, true);
+        transform.SetParent(dragLayer, false);
+
+        rectTransform.rotation = Quaternion.identity;
+        rectTransform.localScale = Vector3.one;
 
         canvasGroup.blocksRaycasts = false;
         canvasGroup.alpha = 0.6f;
@@ -44,6 +46,9 @@ public class InventoryItem : MonoBehaviour,
     {
         canvasGroup.blocksRaycasts = true;
         canvasGroup.alpha = 1f;
+
+        rectTransform.rotation = Quaternion.identity;
+        rectTransform.localScale = Vector3.one;
 
         if (isPlaced)
         {

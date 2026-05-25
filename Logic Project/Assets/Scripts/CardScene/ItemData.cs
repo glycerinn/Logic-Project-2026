@@ -1,0 +1,20 @@
+using UnityEngine;
+
+public enum ItemType
+{
+    Material,
+    Weapon
+}
+
+[CreateAssetMenu(fileName = "Item", menuName = "Game/Item")]
+public class ItemData : ScriptableObject
+{
+    public string itemName;
+
+    public ItemType itemType;
+
+    public Sprite icon;
+
+    [TextArea]
+    public string description;
+}

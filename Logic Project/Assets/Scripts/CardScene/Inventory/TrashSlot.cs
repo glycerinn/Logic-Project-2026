@@ -9,10 +9,14 @@ public class TrashSlot : MonoBehaviour, IDropHandler
     {
         GameObject dropped = eventData.pointerDrag;
         if (dropped == null) return;
-        
+
         InventoryItem item = dropped.GetComponent<InventoryItem>();
         if (item == null) return;
+        
+        InventorySlot slot = item.currentSlot;
 
-        inventoryManager.RemoveItem(item.slotIndex);
+        if (slot == null) return;
+
+        inventoryManager.RemoveItem(slot.slotIndex);
     }
 }
