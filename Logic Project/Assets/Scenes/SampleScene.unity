@@ -1259,6 +1259,7 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 726090692}
   - {fileID: 1183721578}
   - {fileID: 1762025874}
   - {fileID: 1239704185}
@@ -1421,6 +1422,54 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 698210482}
   m_CullTransparentMesh: 1
+--- !u!1 &726090691
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 726090692}
+  - component: {fileID: 726090693}
+  m_Layer: 0
+  m_Name: MergeManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &726090692
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 726090691}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 495, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 697105322}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &726090693
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 726090691}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d84b73e9d34418459c067a43085a9b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MergeManager
+  recipes:
+  - {fileID: 11400000, guid: a9295bb9437155f41a43ffdde4333af5, type: 2}
+  inventoryManager: {fileID: 1183721577}
+  selectedItems: []
 --- !u!1 &860532551
 GameObject:
   m_ObjectHideFlags: 0
@@ -1800,19 +1849,11 @@ MonoBehaviour:
   visibleColumns: 15
   maxColumnsLeft: 3
   materialTiles:
-  - {fileID: 11400000, guid: a39e33cf13c18cc46a32c2531c9f0782, type: 2}
   - {fileID: 11400000, guid: c4da0f26ce51d5f4197938bcec2542aa, type: 2}
-  - {fileID: 11400000, guid: 830fcd2b3526b514b8e5d8d9d4c51818, type: 2}
-  - {fileID: 11400000, guid: 7e137381d53062b448ea5f19f10b4c7f, type: 2}
+  - {fileID: 11400000, guid: a39e33cf13c18cc46a32c2531c9f0782, type: 2}
   enemyTiles:
   - {fileID: 11400000, guid: f5190b19f19540045b5735f3bcf7f30b, type: 2}
-  - {fileID: 11400000, guid: a61813f88064ac7418044364f7acc02b, type: 2}
-  - {fileID: 11400000, guid: 06ee78c2ae525d24eb907454c47033eb, type: 2}
-  - {fileID: 11400000, guid: 5d322adfd37500f41934a4b092035117, type: 2}
   weaponTiles:
-  - {fileID: 11400000, guid: 61acb4afa3e9b284192395d4a8ead4a7, type: 2}
-  - {fileID: 11400000, guid: 2ebbe00f1c6092f4d8466dce3d197982, type: 2}
-  - {fileID: 11400000, guid: 6a887e5a6ff617944a996749d160bc1a, type: 2}
   - {fileID: 11400000, guid: 09a6bbd4ecb33b24eb7bfdd1d4760421, type: 2}
   moveSpeed: 12
   inventoryManager: {fileID: 1183721577}

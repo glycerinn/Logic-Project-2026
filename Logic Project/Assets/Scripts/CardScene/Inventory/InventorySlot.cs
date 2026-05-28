@@ -28,6 +28,8 @@ public class InventorySlot : MonoBehaviour
         icon.enabled = true;
         icon.sprite = itemData.icon;
 
+        item.currentSlot = this;
+
         icon.preserveAspect = true;
 
         icon.rectTransform.localScale = Vector3.one;

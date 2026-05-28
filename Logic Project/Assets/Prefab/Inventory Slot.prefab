@@ -90,6 +90,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InventorySlot
   icon: {fileID: 8426260154630685419}
+  item: {fileID: 0}
+  currentItem: {fileID: 0}
+  slotIndex: 0
 --- !u!1 &8477096291069898576
 GameObject:
   m_ObjectHideFlags: 0
@@ -104,6 +107,7 @@ GameObject:
   - component: {fileID: 7446519062956415417}
   - component: {fileID: 7940150890294744354}
   - component: {fileID: 6524677755122158179}
+  - component: {fileID: 6488142299392922866}
   m_Layer: 5
   m_Name: Icon
   m_TagString: Untagged
@@ -203,6 +207,8 @@ MonoBehaviour:
   originalParent: {fileID: 3151709953837818417}
   originalPosition: {x: 0, y: 0}
   dragLayer: {fileID: 0}
+  currentSlot: {fileID: 0}
+  isSelected: 0
   isPlaced: 0
   wasDropped: 0
 --- !u!225 &6524677755122158179
@@ -217,3 +223,18 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
+--- !u!114 &6488142299392922866
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8477096291069898576}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Outline
+  m_EffectColor: {r: 0.022012413, g: 1, b: 0.109680526, a: 0.8235294}
+  m_EffectDistance: {x: 2, y: 2}
+  m_UseGraphicAlpha: 1

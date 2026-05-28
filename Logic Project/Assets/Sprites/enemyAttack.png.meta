@@ -1,37 +1,10 @@
 fileFormatVersion: 2
-guid: 319f1982c2f0b2142ad4830540ce22b1
+guid: 69a88034156349240819fbebd3abe4e9
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 310519073987823814
-    second: Bluefish_ID_1600x_7bd68aaedf_0
-  - first:
-      213: 7033240467840032367
-    second: Bluefish_ID_1600x_7bd68aaedf_1
-  - first:
-      213: 2096954913423474411
-    second: Bluefish_ID_1600x_7bd68aaedf_2
-  - first:
-      213: 2169298911662390947
-    second: Bluefish_ID_1600x_7bd68aaedf_3
-  - first:
-      213: -3478257161078395027
-    second: Bluefish_ID_1600x_7bd68aaedf_4
-  - first:
-      213: 7773344366480740390
-    second: Bluefish_ID_1600x_7bd68aaedf_5
-  - first:
-      213: -7923110657708786342
-    second: Bluefish_ID_1600x_7bd68aaedf_6
-  - first:
-      213: -1124475142510732131
-    second: Bluefish_ID_1600x_7bd68aaedf_7
-  - first:
-      213: 1657034233562790500
-    second: Bluefish_ID_1600x_7bd68aaedf_8
-  - first:
-      213: -8606130152373909420
-    second: Bluefish_ID_1600x_7bd68aaedf_9
+      213: 1630718009584589618
+    second: enemyAttack_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -140,23 +113,23 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Bluefish_ID_1600x_7bd68aaedf_0
+      name: enemyAttack_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 398
+        x: 226
+        y: 290
         width: 1562
-        height: 434
+        height: 1449
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 6c8070dd37f2f4400800000000000000
-      internalID: 310519073987823814
+      spriteID: 23b1f1ac36971a610800000000000000
+      internalID: 1630718009584589618
       vertices: []
       indices: 
       edges: []
@@ -165,7 +138,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: f2bac815d102da042981d44f7953636f
+    spriteID: 
     internalID: 0
     vertices: []
     indices: 
@@ -175,17 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Bluefish_ID_1600x_7bd68aaedf_0: 310519073987823814
-      Bluefish_ID_1600x_7bd68aaedf_1: 7033240467840032367
-      Bluefish_ID_1600x_7bd68aaedf_10: -1285095733
-      Bluefish_ID_1600x_7bd68aaedf_2: 2096954913423474411
-      Bluefish_ID_1600x_7bd68aaedf_3: 2169298911662390947
-      Bluefish_ID_1600x_7bd68aaedf_4: -3478257161078395027
-      Bluefish_ID_1600x_7bd68aaedf_5: 7773344366480740390
-      Bluefish_ID_1600x_7bd68aaedf_6: -7923110657708786342
-      Bluefish_ID_1600x_7bd68aaedf_7: -1124475142510732131
-      Bluefish_ID_1600x_7bd68aaedf_8: 1657034233562790500
-      Bluefish_ID_1600x_7bd68aaedf_9: -8606130152373909420
+      enemyAttack_0: 1630718009584589618
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

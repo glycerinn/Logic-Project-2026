@@ -37,8 +37,7 @@ public class InventoryManager : MonoBehaviour
 
         for(int i = index; i < currentIndex - 1; i++)
         {
-            slots[i].icon.sprite = slots[i + 1].icon.sprite;
-            slots[i].icon.color = slots[i + 1].icon.color;
+            slots[i].CopyFrom(slots[i + 1]);
         }
 
         slots[currentIndex - 1].RemoveItem();    

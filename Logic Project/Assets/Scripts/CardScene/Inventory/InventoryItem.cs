@@ -1,8 +1,9 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class InventoryItem : MonoBehaviour,
-    IBeginDragHandler, IDragHandler, IEndDragHandler
+    IBeginDragHandler, IDragHandler, IEndDragHandler, IPointerClickHandler
 {
     private RectTransform rectTransform;
     private CanvasGroup canvasGroup;
@@ -10,12 +11,21 @@ public class InventoryItem : MonoBehaviour,
     public Vector2 originalPosition;
     public Transform dragLayer;
     public InventorySlot currentSlot;
+    private Outline outline;
 
+    public bool isSelected = false;
     public bool isPlaced = false;
     public bool wasDropped = false;
 
     void Awake()
     {
+        outline = GetComponent<Outline>();
+
+        if (outline != null)
+        {
+            outline.enabled = false;
+        }
+
         rectTransform = GetComponent<RectTransform>();
         canvasGroup = GetComponent<CanvasGroup>();
         dragLayer = GameObject.FindGameObjectWithTag("DragLayer").transform;
@@ -60,6 +70,45 @@ public class InventoryItem : MonoBehaviour,
         {
             transform.SetParent(originalParent, false);
             rectTransform.anchoredPosition = originalPosition;
+        }
+    }
+
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
+            if (isSelected)
+            {
+                Deselect();
+
+                MergeManager.Instance.selectedItems.Remove(this);
+            }
+            else
+            {
+                Select();
+
+                MergeManager.Instance.selectedItems.Add(this);
+            }
+        }
+    }
+
+    public void Select()
+    {
+        isSelected = true;
+
+         if (outline != null)
+        {
+            outline.enabled = true;
+        }
+    }
+
+    public void Deselect()
+    {
+        isSelected = false;
+
+        if (outline != null)
+        {
+            outline.enabled = false;
         }
     }
 }
