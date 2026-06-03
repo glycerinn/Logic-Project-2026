@@ -35,7 +35,6 @@ public class GridManager : MonoBehaviour
     private int activeColumn = 0;
     private float cellWidth;
 
-    // SETUP
     void Awake()
     {
         Instance = this;
@@ -53,8 +52,6 @@ public class GridManager : MonoBehaviour
 
         UpdateActiveColumn();
     }
-
-    // CREATE COLUMN
 
     void CreateColumn()
     {
@@ -79,7 +76,6 @@ public class GridManager : MonoBehaviour
         columns.Add(newColumn);
     }
 
-    // RECYCLE COLUMN
 
     void RecycleLeftColumn()
     {
@@ -125,7 +121,6 @@ public class GridManager : MonoBehaviour
         return null;
     }
 
-    // PLAYER MOVE
 
     public void OnTileChosen(DropTile chosenTile, GameObject cardObj)
     {
@@ -174,8 +169,6 @@ public class GridManager : MonoBehaviour
 
         UpdateActiveColumn();
 
-        // SMOOTH SHIFT
-
         RectTransform gridRect = gridParent.GetComponent<RectTransform>();
         Vector2 startPos = gridRect.anchoredPosition;
         Vector2 targetPos = startPos - new Vector2(cellWidth, 0);
@@ -195,10 +188,6 @@ public class GridManager : MonoBehaviour
 
         CleanupColumns();
 
-        //==================================================
-        // INVENTORY
-        //==================================================
-
         if (chosenTile.hasItem && chosenTile.tileData.itemReward != null)
         {
             inventoryManager.AddItem(chosenTile.tileData.itemReward);
@@ -211,7 +200,6 @@ public class GridManager : MonoBehaviour
             }
         }
 
-        // BATTLE
         if (chosenTile.tileData.type == TileType.Enemy)
         {
             BattleData.currentEnemy = chosenTile.tileData;
@@ -219,8 +207,6 @@ public class GridManager : MonoBehaviour
             StartCoroutine(EnterBattle());
         }
     }
-
-    // CLEANUP
 
     void CleanupColumns()
     {
@@ -234,7 +220,6 @@ public class GridManager : MonoBehaviour
         }
     }
 
-    // ACTIVE COLUMN
 
     void UpdateActiveColumn()
     {
@@ -272,6 +257,8 @@ public class GridManager : MonoBehaviour
         inventory.SetActive(false);
         trash.SetActive(false);
 
+        PrepareBattleWeapons();
+
         yield return SceneManager.LoadSceneAsync("Battle Scene", LoadSceneMode.Additive);
     }
 
@@ -298,6 +285,38 @@ public class GridManager : MonoBehaviour
             {
                 cg.blocksRaycasts = true;
                 cg.alpha = 1f;
+            }
+        }
+    }
+
+    void PrepareBattleWeapons()
+    {
+        List<ItemData> weapons = new List<ItemData>();
+
+        foreach (InventorySlot slot in inventoryManager.slots)
+        {
+            if (slot.currentItem != null && slot.currentItem.itemType == ItemType.Weapon)
+            {
+                weapons.Add(slot.currentItem);
+            }
+        }
+
+        BattleData.selectedWeapons.Clear();
+
+        if (weapons.Count <= 3)
+        {
+            BattleData.selectedWeapons.AddRange(weapons);
+        }
+        else
+        {
+            List<ItemData> pool = new List<ItemData>(weapons);
+
+            for (int i = 0; i < 3; i++)
+            {
+                int randomIndex = Random.Range(0, pool.Count);
+                BattleData.selectedWeapons.Add(pool[randomIndex]);
+
+                pool.RemoveAt(randomIndex);
             }
         }
     }

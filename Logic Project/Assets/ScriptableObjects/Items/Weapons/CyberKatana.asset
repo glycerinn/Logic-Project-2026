@@ -15,4 +15,4 @@ MonoBehaviour:
   itemName: CyberKatana
   itemType: 1
   icon: {fileID: 7362911415777394052, guid: 3bd79876ff260674084fd17b57757d88, type: 3}
-  description: 
+  damage: 30

@@ -15,4 +15,4 @@ MonoBehaviour:
   itemName: Defribilator
   itemType: 1
   icon: {fileID: 6150218169204797715, guid: cc957bcd91273ae4aba04debdacba4f2, type: 3}
-  description: 
+  damage: 10

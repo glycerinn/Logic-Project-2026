@@ -15,4 +15,4 @@ MonoBehaviour:
   itemName: Combat Knife
   itemType: 1
   icon: {fileID: -376945165468471503, guid: ec4d60709aab2004fa7fe4e162b75d2a, type: 3}
-  description: 
+  damage: 15

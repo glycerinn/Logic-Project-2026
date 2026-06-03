@@ -15,4 +15,4 @@ MonoBehaviour:
   itemName: CGS
   itemType: 1
   icon: {fileID: 274056855454662905, guid: 96d79be0228b6114cadbaaa255d242b6, type: 3}
-  description: 
+  damage: 10
