@@ -143,6 +143,9 @@ public class BattleManager : MonoBehaviour
 
         foreach (ItemData weapon in selectedWeapons)
         {
+            playerAnimator.SetTrigger("Attack");
+
+            yield return new WaitForSeconds(0.3f);
             enemyHP -= weapon.damage;
             enemyHP = Mathf.Max(0, enemyHP);
 
@@ -172,6 +175,8 @@ public class BattleManager : MonoBehaviour
     {
         if (battleEnded)
             return;
+
+        playerAnimator.SetTrigger("Hurt");
 
         playerHP -= enemyAttack;
         playerHP = Mathf.Max(0, playerHP);
