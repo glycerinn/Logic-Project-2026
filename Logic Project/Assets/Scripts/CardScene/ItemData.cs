@@ -16,4 +16,6 @@ public class ItemData : ScriptableObject
     public Sprite icon;
 
     public int damage;
+
+    public int maxDurability = 10;
 }

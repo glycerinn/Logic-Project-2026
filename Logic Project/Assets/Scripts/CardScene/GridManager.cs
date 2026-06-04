@@ -15,6 +15,8 @@ public class GridManager : MonoBehaviour
     public int width = 4;
     public int visibleColumns = 6;
     public int maxColumnsLeft = 2;
+    private int totalColumnsCreated = 0;
+    private int nextEnemyColumn = 3;
 
     [Header("Tile Data")]
     public TileData[] materialTiles;
@@ -42,6 +44,7 @@ public class GridManager : MonoBehaviour
 
     void Start()
     {
+        nextEnemyColumn = Random.Range(3, 5);
         GridLayoutGroup layout = gridParent.GetComponent<GridLayoutGroup>();
         cellWidth = layout.cellSize.x + layout.spacing.x;
 
@@ -56,7 +59,21 @@ public class GridManager : MonoBehaviour
     void CreateColumn()
     {
         List<DropTile> newColumn = new List<DropTile>();
-        TileType columnType = (TileType)Random.Range(0, 3);
+        TileType columnType;
+
+        if (totalColumnsCreated >= nextEnemyColumn)
+        {
+            columnType = TileType.Enemy;
+
+            nextEnemyColumn += Random.Range(3, 5);
+        }
+        else
+        {
+            columnType =
+                Random.value < 0.5f
+                ? TileType.Material
+                : TileType.Weapon;
+        }
 
         for (int y = 0; y < width; y++)
         {
@@ -74,6 +91,8 @@ public class GridManager : MonoBehaviour
         }
 
         columns.Add(newColumn);
+
+        totalColumnsCreated++;
     }
 
 
@@ -82,7 +101,21 @@ public class GridManager : MonoBehaviour
         List<DropTile> recycledColumn = columns[0];
 
         columns.RemoveAt(0);
-        TileType columnType = (TileType)Random.Range(0, 3);
+        TileType columnType;
+
+        if (totalColumnsCreated >= nextEnemyColumn)
+        {
+            columnType = TileType.Enemy;
+
+            nextEnemyColumn += Random.Range(3, 5);
+        }
+        else
+        {
+            columnType =
+                Random.value < 0.5f
+                ? TileType.Material
+                : TileType.Weapon;
+        }
 
         foreach (DropTile tile in recycledColumn)
         {
@@ -102,6 +135,8 @@ public class GridManager : MonoBehaviour
         }
 
         columns.Add(recycledColumn);
+
+        totalColumnsCreated++;
     }
 
     // TILE DATA
@@ -129,6 +164,36 @@ public class GridManager : MonoBehaviour
         StartCoroutine(
             HandleMove(chosenTile, cardObj)
         );
+    }
+    
+    void ReduceAllDurability(int amount)
+    {
+        foreach (InventorySlot slot in inventoryManager.slots)
+        {
+            if (slot.currentItem == null)
+                continue;
+
+            slot.durability -= amount;
+            slot.UpdateDurabilityUI();
+
+            if (slot.durability <= 0)
+            {
+                slot.RemoveItem();
+            }
+        }
+    }
+
+    void RestoreDurability(int amount)
+    {
+        foreach (InventorySlot slot in inventoryManager.slots)
+        {
+            if (slot.currentItem == null)
+                continue;
+
+            slot.durability += amount;
+            slot.UpdateDurabilityUI();
+            slot.durability = Mathf.Min(slot.durability, slot.currentItem.maxDurability);
+        }
     }
 
     IEnumerator HandleMove(DropTile chosenTile, GameObject cardObj)
@@ -167,6 +232,8 @@ public class GridManager : MonoBehaviour
 
         activeColumn++;
 
+        ReduceAllDurability(1);
+
         UpdateActiveColumn();
 
         RectTransform gridRect = gridParent.GetComponent<RectTransform>();
@@ -202,8 +269,8 @@ public class GridManager : MonoBehaviour
 
         if (chosenTile.tileData.type == TileType.Enemy)
         {
+            RestoreDurability(3);
             BattleData.currentEnemy = chosenTile.tileData;
-
             StartCoroutine(EnterBattle());
         }
     }

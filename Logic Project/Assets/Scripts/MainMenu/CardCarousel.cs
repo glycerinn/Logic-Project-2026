@@ -87,7 +87,9 @@ public class CardCarousel : MonoBehaviour
 
             card.localEulerAngles = Vector3.zero;
             card.localScale = Vector3.one;
-            card.anchoredPosition = Vector2.zero;
+            card.localScale = Vector3.one * maxScale;
+
+            card.anchoredPosition = new Vector2(0, 60f);
 
             return;
         }
