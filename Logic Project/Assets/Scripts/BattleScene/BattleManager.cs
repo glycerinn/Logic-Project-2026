@@ -17,6 +17,7 @@ public class BattleManager : MonoBehaviour
 
     public GameObject cardPrefab;
     public Transform cardParent;
+    public Animator playerAnimator;
 
     private List<ItemData> selectedWeapons = new();
 
@@ -115,6 +116,10 @@ public class BattleManager : MonoBehaviour
     IEnumerator SingleWeaponAttack(ItemData weapon)
     {
         playerTurn = false;
+
+        playerAnimator.SetTrigger("Attack");
+
+        yield return new WaitForSeconds(0.3f);
 
         enemyHP -= weapon.damage;
         enemyHP = Mathf.Max(0, enemyHP);

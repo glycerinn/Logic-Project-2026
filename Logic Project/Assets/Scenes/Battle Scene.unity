@@ -532,6 +532,7 @@ GameObject:
   - component: {fileID: 424784577}
   - component: {fileID: 424784579}
   - component: {fileID: 424784578}
+  - component: {fileID: 424784580}
   m_Layer: 5
   m_Name: Player
   m_TagString: Untagged
@@ -596,6 +597,28 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 424784576}
   m_CullTransparentMesh: 1
+--- !u!95 &424784580
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 424784576}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 2437ab3c58723df41b3a25b39b10b11c, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &451401355
 GameObject:
   m_ObjectHideFlags: 0
@@ -935,6 +958,7 @@ MonoBehaviour:
   enemyImage: {fileID: 1800117876}
   cardPrefab: {fileID: 113028502602967828, guid: a0b22bc423e366544ba142ba4aa3129c, type: 3}
   cardParent: {fileID: 1323760130}
+  playerAnimator: {fileID: 424784580}
 --- !u!1 &1323760129
 GameObject:
   m_ObjectHideFlags: 0

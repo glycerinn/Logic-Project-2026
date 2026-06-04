@@ -1855,6 +1855,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: a39e33cf13c18cc46a32c2531c9f0782, type: 2}
   enemyTiles:
   - {fileID: 11400000, guid: f5190b19f19540045b5735f3bcf7f30b, type: 2}
+  - {fileID: 11400000, guid: a61813f88064ac7418044364f7acc02b, type: 2}
+  - {fileID: 11400000, guid: 06ee78c2ae525d24eb907454c47033eb, type: 2}
+  - {fileID: 11400000, guid: 5d322adfd37500f41934a4b092035117, type: 2}
   weaponTiles:
   - {fileID: 11400000, guid: 09a6bbd4ecb33b24eb7bfdd1d4760421, type: 2}
   moveSpeed: 12
