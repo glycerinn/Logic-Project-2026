@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8ffb03933c9ae5b4e81932d5d97493f6, type: 3}
-  m_Name: Prototype Arm
+  m_Name: Handcannon
   m_EditorClassIdentifier: Assembly-CSharp::TileData
-  tileName: Prototype Arm
+  tileName: Handcannon
   type: 2
-  sprite: {fileID: -5488259934343510855, guid: 2dfe371f74b64354296fdfba2855998b, type: 3}
+  sprite: {fileID: 8766863098361882804, guid: b4f720c56a322b740851af56f9c5828e, type: 3}
   color: {r: 1, g: 1, b: 1, a: 1}
   maxHP: 0
   attack: 0
-  itemReward: {fileID: 11400000, guid: cd0ef9f8a2514fa4bb92628f60ec6d61, type: 2}
+  itemReward: {fileID: 11400000, guid: 48e2c0ade0fd6ec4b8b3c33d23008beb, type: 2}
