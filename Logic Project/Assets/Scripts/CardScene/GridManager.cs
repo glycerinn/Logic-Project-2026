@@ -16,7 +16,11 @@ public class GridManager : MonoBehaviour
     public int visibleColumns = 6;
     public int maxColumnsLeft = 2;
     private int totalColumnsCreated = 0;
+    private int columnsTraversed = 0;
+    public int maxColumns = 10;
     private int nextEnemyColumn = 3;
+
+    public bool finalBattleTriggered = false;
 
     [Header("Tile Data")]
     public TileData[] materialTiles;
@@ -30,12 +34,14 @@ public class GridManager : MonoBehaviour
     public InventoryManager inventoryManager;
 
     public GameObject gridRoot;
+    public GameObject victoryPanel;
     public GameObject inventory;
     public GameObject trash;
 
     private List<List<DropTile>> columns = new List<List<DropTile>>();
     private int activeColumn = 0;
     private float cellWidth;
+    
 
     void Awake()
     {
@@ -61,16 +67,18 @@ public class GridManager : MonoBehaviour
         List<DropTile> newColumn = new List<DropTile>();
         TileType columnType;
 
-        if (totalColumnsCreated >= nextEnemyColumn)
+        if (totalColumnsCreated >= maxColumns - 1)
         {
             columnType = TileType.Enemy;
-
+        }
+        else if (totalColumnsCreated >= nextEnemyColumn)
+        {
+            columnType = TileType.Enemy;
             nextEnemyColumn += Random.Range(3, 5);
         }
         else
         {
-            columnType =
-                Random.value < 0.5f
+            columnType = Random.value < 0.5f
                 ? TileType.Material
                 : TileType.Weapon;
         }
@@ -103,16 +111,18 @@ public class GridManager : MonoBehaviour
         columns.RemoveAt(0);
         TileType columnType;
 
-        if (totalColumnsCreated >= nextEnemyColumn)
+        if (totalColumnsCreated >= maxColumns - 1)
         {
             columnType = TileType.Enemy;
-
+        }
+        else if (totalColumnsCreated >= nextEnemyColumn)
+        {
+            columnType = TileType.Enemy;
             nextEnemyColumn += Random.Range(3, 5);
         }
         else
         {
-            columnType =
-                Random.value < 0.5f
+            columnType = Random.value < 0.5f
                 ? TileType.Material
                 : TileType.Weapon;
         }
@@ -231,6 +241,18 @@ public class GridManager : MonoBehaviour
         cardRect.localScale = Vector3.one;
 
         activeColumn++;
+        columnsTraversed++;
+        
+        if (columnsTraversed >= maxColumns && !finalBattleTriggered)
+        {
+            finalBattleTriggered = true;
+
+            RestoreDurability(3);
+            BattleData.currentEnemy = enemyTiles[0]; // your boss
+            StartCoroutine(EnterBattle());
+
+            yield break;
+        }
 
         ReduceAllDurability(1);
 
@@ -277,6 +299,9 @@ public class GridManager : MonoBehaviour
 
     void CleanupColumns()
     {
+        if (finalBattleTriggered)
+            return;
+
         if (activeColumn > maxColumnsLeft)
         {
             RecycleLeftColumn();
@@ -387,4 +412,24 @@ public class GridManager : MonoBehaviour
             }
         }
     }
+
+    public IEnumerator ReturnAndShowVictory()
+    {
+        yield return SceneManager.UnloadSceneAsync("Battle Scene");    
+
+        gridRoot.SetActive(true);
+        inventory.SetActive(true);
+        trash.SetActive(true);
+
+        victoryPanel.SetActive(true);
+
+        Time.timeScale = 0f;
+    }
+
+    public void ShowVictory()
+    {
+        victoryPanel.SetActive(true);
+    }
+
+    
 }

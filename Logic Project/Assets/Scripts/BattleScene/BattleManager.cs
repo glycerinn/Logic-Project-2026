@@ -196,10 +196,15 @@ public class BattleManager : MonoBehaviour
     void WinBattle()
     {
         enemyImage.gameObject.SetActive(false);
-
         EndBattle(true);
 
-        if (GridManager.Instance != null)
+        if (GridManager.Instance.finalBattleTriggered)
+        {
+            GridManager.Instance.StartCoroutine(
+                GridManager.Instance.ReturnAndShowVictory()
+            );
+        }
+        else
         {
             GridManager.Instance.ReturnFromBattle();
         }
