@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6aec681bf3a2b2d489eb6f1284e9ebe7, type: 3}
+  m_Name: HeatedFlail
+  m_EditorClassIdentifier: Assembly-CSharp::RecipeData
+  ingredients:
+  - {fileID: 11400000, guid: e6de5099bb834ed40a96d81bdc9818a3, type: 2}
+  - {fileID: 11400000, guid: 7a59053a0c9ddde4e9913dea5c9c5876, type: 2}
+  - {fileID: 11400000, guid: f298343bcddf9ae49bd0d6f29b33ba1d, type: 2}
+  result: {fileID: 11400000, guid: fbc8c9cdfc301d84fb6cd5c0bc212fbc, type: 2}

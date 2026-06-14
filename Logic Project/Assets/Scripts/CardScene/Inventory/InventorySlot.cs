@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -5,8 +6,10 @@ public class InventorySlot : MonoBehaviour
 {
     public Image icon;
     public InventoryItem item;
+    public TextMeshProUGUI durabilityText;
 
     public ItemData currentItem;
+    public int durability;
 
     public int slotIndex;
 
@@ -24,9 +27,12 @@ public class InventorySlot : MonoBehaviour
         }
 
         currentItem = itemData;
+        durability = currentItem.maxDurability;
 
         icon.enabled = true;
         icon.sprite = itemData.icon;
+
+        item.currentSlot = this;
 
         icon.preserveAspect = true;
 
@@ -61,4 +67,16 @@ public class InventorySlot : MonoBehaviour
         icon.color = other.icon.color;
         icon.enabled = other.icon.enabled;
     }
+
+    public void UpdateDurabilityUI()
+    {
+        if (currentItem == null)
+        {
+            durabilityText.text = "";
+            return;
+        }
+
+        durabilityText.text = durability.ToString();
+    }
+
 }

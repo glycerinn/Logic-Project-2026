@@ -15,11 +15,17 @@ public class GridManager : MonoBehaviour
     public int width = 4;
     public int visibleColumns = 6;
     public int maxColumnsLeft = 2;
+    private int totalColumnsCreated = 0;
+    public int maxColumns = 10;
+    private int nextEnemyColumn = 3;
+
+    public bool finalBattleTriggered = false;
 
     [Header("Tile Data")]
     public TileData[] materialTiles;
     public TileData[] enemyTiles;
     public TileData[] weaponTiles;
+    public TileData coinTileData;
 
     [Header("Movement")]
     public float moveSpeed = 12f;
@@ -28,6 +34,7 @@ public class GridManager : MonoBehaviour
     public InventoryManager inventoryManager;
 
     public GameObject gridRoot;
+    public GameObject victoryPanel;
     public GameObject inventory;
     public GameObject trash;
 
@@ -35,7 +42,10 @@ public class GridManager : MonoBehaviour
     private int activeColumn = 0;
     private float cellWidth;
 
-    // SETUP
+    [Header("UI")]
+    public Slider progressSlider;
+    
+
     void Awake()
     {
         Instance = this;
@@ -43,6 +53,10 @@ public class GridManager : MonoBehaviour
 
     void Start()
     {
+        progressSlider.minValue = 0;
+        progressSlider.maxValue = maxColumns;
+        progressSlider.value = 0;
+        nextEnemyColumn = Random.Range(3, 5);
         GridLayoutGroup layout = gridParent.GetComponent<GridLayoutGroup>();
         cellWidth = layout.cellSize.x + layout.spacing.x;
 
@@ -54,12 +68,28 @@ public class GridManager : MonoBehaviour
         UpdateActiveColumn();
     }
 
-    // CREATE COLUMN
-
     void CreateColumn()
     {
+        if (totalColumnsCreated >= maxColumns) return;
+        bool isBossColumn = totalColumnsCreated == maxColumns - 1;
         List<DropTile> newColumn = new List<DropTile>();
-        TileType columnType = (TileType)Random.Range(0, 3);
+        TileType columnType;
+
+        if (totalColumnsCreated >= maxColumns - 1)
+        {
+            columnType = TileType.Enemy;
+        }
+        else if (totalColumnsCreated >= nextEnemyColumn)
+        {
+            columnType = TileType.Enemy;
+            nextEnemyColumn += Random.Range(3, 5);
+        }
+        else
+        {
+            columnType = Random.value < 0.5f
+                ? TileType.Material
+                : TileType.Weapon;
+        }
 
         for (int y = 0; y < width; y++)
         {
@@ -72,21 +102,46 @@ public class GridManager : MonoBehaviour
             TileData data = GetRandomTileFromType(columnType);
 
             tile.tileData = data;
+
+            if (isBossColumn)
+            {
+                tile.isBossTile = true;
+            }
+
             tile.ApplyVisuals();
             newColumn.Add(tile);
         }
 
         columns.Add(newColumn);
+
+        totalColumnsCreated++;
+        Debug.Log("Total columns created: " + totalColumnsCreated);
     }
 
-    // RECYCLE COLUMN
 
     void RecycleLeftColumn()
     {
+        if (finalBattleTriggered || totalColumnsCreated >= maxColumns) return;
         List<DropTile> recycledColumn = columns[0];
 
         columns.RemoveAt(0);
-        TileType columnType = (TileType)Random.Range(0, 3);
+        TileType columnType;
+
+        if (totalColumnsCreated >= maxColumns - 1)
+        {
+            columnType = TileType.Enemy;
+        }
+        else if (totalColumnsCreated >= nextEnemyColumn)
+        {
+            columnType = TileType.Enemy;
+            nextEnemyColumn += Random.Range(3, 5);
+        }
+        else
+        {
+            columnType = Random.value < 0.5f
+                ? TileType.Material
+                : TileType.Weapon;
+        }
 
         foreach (DropTile tile in recycledColumn)
         {
@@ -94,6 +149,12 @@ public class GridManager : MonoBehaviour
             tile.transform.SetAsLastSibling();
 
             TileData data = GetRandomTileFromType(columnType);
+
+            if (columnType == TileType.Material && Random.value < 0.8f)
+            {
+                Debug.Log("Coin spawned!");
+                data = coinTileData;
+            }
 
             tile.tileData = data;
             tile.hasItem = true;
@@ -106,6 +167,8 @@ public class GridManager : MonoBehaviour
         }
 
         columns.Add(recycledColumn);
+
+        totalColumnsCreated++;
     }
 
     // TILE DATA
@@ -125,7 +188,6 @@ public class GridManager : MonoBehaviour
         return null;
     }
 
-    // PLAYER MOVE
 
     public void OnTileChosen(DropTile chosenTile, GameObject cardObj)
     {
@@ -134,6 +196,36 @@ public class GridManager : MonoBehaviour
         StartCoroutine(
             HandleMove(chosenTile, cardObj)
         );
+    }
+    
+    void ReduceAllDurability(int amount)
+    {
+        foreach (InventorySlot slot in inventoryManager.slots)
+        {
+            if (slot.currentItem == null)
+                continue;
+
+            slot.durability -= amount;
+            slot.UpdateDurabilityUI();
+
+            if (slot.durability <= 0)
+            {
+                slot.RemoveItem();
+            }
+        }
+    }
+
+    void RestoreDurability(int amount)
+    {
+        foreach (InventorySlot slot in inventoryManager.slots)
+        {
+            if (slot.currentItem == null)
+                continue;
+
+            slot.durability += amount;
+            slot.UpdateDurabilityUI();
+            slot.durability = Mathf.Min(slot.durability, slot.currentItem.maxDurability);
+        }
     }
 
     IEnumerator HandleMove(DropTile chosenTile, GameObject cardObj)
@@ -172,9 +264,19 @@ public class GridManager : MonoBehaviour
 
         activeColumn++;
 
-        UpdateActiveColumn();
+        progressSlider.value = totalColumnsCreated - (columns.Count - activeColumn);
+        
+        if (chosenTile.isBossTile && !finalBattleTriggered)
+        {
+            finalBattleTriggered = true;
+            BattleData.currentEnemy = chosenTile.tileData;
+            StartCoroutine(EnterBattle());
 
-        // SMOOTH SHIFT
+            yield break;
+        }
+
+        ReduceAllDurability(1);
+        UpdateActiveColumn();
 
         RectTransform gridRect = gridParent.GetComponent<RectTransform>();
         Vector2 startPos = gridRect.anchoredPosition;
@@ -192,17 +294,21 @@ public class GridManager : MonoBehaviour
         }
 
         gridRect.anchoredPosition = targetPos;
-
         CleanupColumns();
 
-        //==================================================
-        // INVENTORY
-        //==================================================
+       if (chosenTile.tileData.isCoin)
+        {
+            CoinManager.Instance.AddCoins(chosenTile.tileData.coinValue);
+            chosenTile.hasItem = false;
 
-        if (chosenTile.hasItem && chosenTile.tileData.itemReward != null)
+            if (chosenTile.tileImage != null)
+            {
+                chosenTile.tileImage.enabled = false;
+            }
+        }
+        else if (chosenTile.hasItem && chosenTile.tileData.itemReward != null)
         {
             inventoryManager.AddItem(chosenTile.tileData.itemReward);
-
             chosenTile.hasItem = false;
 
             if (chosenTile.tileImage != null)
@@ -211,19 +317,19 @@ public class GridManager : MonoBehaviour
             }
         }
 
-        // BATTLE
         if (chosenTile.tileData.type == TileType.Enemy)
         {
+            RestoreDurability(3);
             BattleData.currentEnemy = chosenTile.tileData;
-
             StartCoroutine(EnterBattle());
         }
     }
 
-    // CLEANUP
-
     void CleanupColumns()
     {
+        if (totalColumnsCreated >= maxColumns)
+        return;
+
         if (activeColumn > maxColumnsLeft)
         {
             RecycleLeftColumn();
@@ -232,9 +338,9 @@ public class GridManager : MonoBehaviour
             RectTransform gridRect = gridParent.GetComponent<RectTransform>();
             gridRect.anchoredPosition += new Vector2(cellWidth, 0);
         }
+        Debug.Log("Final battle triggered: " + finalBattleTriggered);
     }
 
-    // ACTIVE COLUMN
 
     void UpdateActiveColumn()
     {
@@ -272,6 +378,8 @@ public class GridManager : MonoBehaviour
         inventory.SetActive(false);
         trash.SetActive(false);
 
+        PrepareBattleWeapons();
+
         yield return SceneManager.LoadSceneAsync("Battle Scene", LoadSceneMode.Additive);
     }
 
@@ -300,5 +408,55 @@ public class GridManager : MonoBehaviour
                 cg.alpha = 1f;
             }
         }
+    }
+
+    void PrepareBattleWeapons()
+    {
+        List<ItemData> weapons = new List<ItemData>();
+
+        foreach (InventorySlot slot in inventoryManager.slots)
+        {
+            if (slot.currentItem != null && slot.currentItem.itemType == ItemType.Weapon)
+            {
+                weapons.Add(slot.currentItem);
+            }
+        }
+
+        BattleData.selectedWeapons.Clear();
+
+        if (weapons.Count <= 3)
+        {
+            BattleData.selectedWeapons.AddRange(weapons);
+        }
+        else
+        {
+            List<ItemData> pool = new List<ItemData>(weapons);
+
+            for (int i = 0; i < 3; i++)
+            {
+                int randomIndex = Random.Range(0, pool.Count);
+                BattleData.selectedWeapons.Add(pool[randomIndex]);
+
+                pool.RemoveAt(randomIndex);
+            }
+        }
+    }
+
+    public IEnumerator ReturnAndShowVictory()
+    {
+        yield return SceneManager.UnloadSceneAsync("Battle Scene");    
+
+        gridRoot.SetActive(true);
+        inventory.SetActive(true);
+        trash.SetActive(true);
+
+        victoryPanel.SetActive(true);
+
+        Time.timeScale = 0f;
+    }
+
+    public void ShowVictory()
+    {
+        victoryPanel.SetActive(true);
     }
 }

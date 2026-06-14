@@ -143,12 +143,12 @@ TextureImporter:
       name: Bluefish_ID_1600x_7bd68aaedf_0
       rect:
         serializedVersion: 2
-        x: 16
-        y: 384
+        x: 0
+        y: 398
         width: 1562
         height: 434
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -161,209 +161,11 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
-    - serializedVersion: 2
-      name: Bluefish_ID_1600x_7bd68aaedf_1
-      rect:
-        serializedVersion: 2
-        x: 1346
-        y: 44
-        width: 100
-        height: 113
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: f6ed18911f61b9160800000000000000
-      internalID: 7033240467840032367
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Bluefish_ID_1600x_7bd68aaedf_2
-      rect:
-        serializedVersion: 2
-        x: 1368
-        y: 156
-        width: 113
-        height: 100
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: beebd943261e91d10800000000000000
-      internalID: 2096954913423474411
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Bluefish_ID_1600x_7bd68aaedf_3
-      rect:
-        serializedVersion: 2
-        x: 1389
-        y: 65
-        width: 148
-        height: 148
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 3ae3741edd5ea1e10800000000000000
-      internalID: 2169298911662390947
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Bluefish_ID_1600x_7bd68aaedf_4
-      rect:
-        serializedVersion: 2
-        x: 1480
-        y: 121
-        width: 100
-        height: 113
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: d6fa6746a8fbabfc0800000000000000
-      internalID: -3478257161078395027
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Bluefish_ID_1600x_7bd68aaedf_5
-      rect:
-        serializedVersion: 2
-        x: 1445
-        y: 22
-        width: 113
-        height: 100
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 6205ed0348770eb60800000000000000
-      internalID: 7773344366480740390
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Bluefish_ID_1600x_7bd68aaedf_6
-      rect:
-        serializedVersion: 2
-        x: 1551
-        y: 81
-        width: 27
-        height: 17
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: a5df723d5d47b0290800000000000000
-      internalID: -7923110657708786342
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Bluefish_ID_1600x_7bd68aaedf_7
-      rect:
-        serializedVersion: 2
-        x: 1555
-        y: 98
-        width: 26
-        height: 21
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: d9c14ebc0df0560f0800000000000000
-      internalID: -1124475142510732131
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Bluefish_ID_1600x_7bd68aaedf_8
-      rect:
-        serializedVersion: 2
-        x: 1530
-        y: 51
-        width: 37
-        height: 38
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 46afb282bd7fef610800000000000000
-      internalID: 1657034233562790500
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Bluefish_ID_1600x_7bd68aaedf_9
-      rect:
-        serializedVersion: 2
-        x: 1476
-        y: 19
-        width: 23
-        height: 24
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 45889f04932e09880800000000000000
-      internalID: -8606130152373909420
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
     outline: []
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: f2bac815d102da042981d44f7953636f
     internalID: 0
     vertices: []
     indices: 
@@ -375,6 +177,7 @@ TextureImporter:
     nameFileIdTable:
       Bluefish_ID_1600x_7bd68aaedf_0: 310519073987823814
       Bluefish_ID_1600x_7bd68aaedf_1: 7033240467840032367
+      Bluefish_ID_1600x_7bd68aaedf_10: -1285095733
       Bluefish_ID_1600x_7bd68aaedf_2: 2096954913423474411
       Bluefish_ID_1600x_7bd68aaedf_3: 2169298911662390947
       Bluefish_ID_1600x_7bd68aaedf_4: -3478257161078395027

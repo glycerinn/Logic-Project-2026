@@ -1,30 +1,39 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using System.Collections.Generic;
 using System.Collections;
-using UnityEngine.SceneManagement;
+using System.Collections.Generic;
 
 public class BattleManager : MonoBehaviour
 {
-    public TextMeshProUGUI playerHPText;
-    public TextMeshProUGUI enemyHPText;
+    public static BattleManager Instance;
     public TextMeshProUGUI resultText;
+
     public Image playerImage;
     public Image enemyImage;
+    public Slider playerHealthSlider;
+    public Slider enemyHealthSlider;
 
-    List<int> selectedAttacks = new List<int>();
-    bool isSelecting = false;
+    public GameObject cardPrefab;
+    public Transform cardParent;
+    public Animator playerAnimator;
 
-    int playerHP = 100;
+    private List<ItemData> selectedWeapons = new();
 
-    bool playerTurn = true;
-    bool battleEnded = false;
+    private bool isSelecting;
+    private bool playerTurn = true;
+    private bool battleEnded;
+
+    private int playerHP = 100;
+    private int enemyHP;
+    private int enemyAttack;
 
     private TileData enemyData;
 
-    private int enemyHP;
-    private int enemyAttack;
+    void Awake()
+    {
+        Instance = this;
+    }
 
     void Start()
     {
@@ -33,12 +42,19 @@ public class BattleManager : MonoBehaviour
         if (enemyData != null)
         {
             enemyImage.sprite = enemyData.sprite;
-
             enemyHP = enemyData.maxHP;
             enemyAttack = enemyData.attack;
-
-            Debug.Log("Fighting: " + enemyData.tileName);
         }
+
+        playerHealthSlider.minValue = 0;
+        playerHealthSlider.maxValue = playerHP;
+        playerHealthSlider.value = playerHP;
+
+        enemyHealthSlider.minValue = 0;
+        enemyHealthSlider.maxValue = enemyHP;
+        enemyHealthSlider.value = enemyHP;
+
+        CreateWeaponCards();
 
         UpdateUI();
         resultText.text = "";
@@ -46,118 +62,68 @@ public class BattleManager : MonoBehaviour
 
     void Update()
     {
-        // Start selecting when Shift is held
         if (Input.GetKeyDown(KeyCode.LeftShift))
         {
             isSelecting = true;
-            selectedAttacks.Clear();
-            Debug.Log("Started selecting attacks");
+            selectedWeapons.Clear();
         }
 
-        // When Shift is released
         if (Input.GetKeyUp(KeyCode.LeftShift))
         {
             isSelecting = false;
 
-            if (selectedAttacks.Count > 0)
+            if (selectedWeapons.Count > 0)
             {
                 StartCoroutine(ExecuteCombo());
             }
         }
     }
 
-    void UpdateUI()
+    void CreateWeaponCards()
     {
-        playerHPText.text = "Player HP: " + playerHP;
-        enemyHPText.text = "Enemy HP: " + enemyHP;
-    }
-
-    void EnemyTurn()
-    {
-        if (battleEnded) return;
-
-        playerHP -= enemyAttack;
-        if (playerHP < 0) playerHP = 0;
-
-        UpdateUI();
-
-        if (playerHP <= 0)
+        foreach (ItemData weapon in BattleData.selectedWeapons)
         {
-            playerHP = 0;
-            playerImage.gameObject.SetActive(false); // disappear
+            GameObject cardObj = Instantiate(cardPrefab, cardParent);
+            BattleCard card = cardObj.GetComponent<BattleCard>();
 
-            EndBattle(false);
-            return;
+            card.Setup(weapon);
         }
 
-        playerTurn = true;
+         CardCarousel carousel = cardParent.GetComponent<CardCarousel>();
+
+        if (carousel != null)
+        {
+            carousel.RefreshCards();
+        }
     }
 
-    void EndBattle(bool playerWon)
+    public void SelectWeapon(ItemData weapon)
     {
-        battleEnded = true;
+        if (!playerTurn || battleEnded)
+            return;
 
-        resultText.text = playerWon ? "YOU WIN!" : "YOU LOSE!";
-    }
-
-    void SelectAttack(int damage)
-    {
-        if (!playerTurn || battleEnded) return;
-
-        // If NOT holding shift
         if (!isSelecting)
         {
-            StartCoroutine(SingleAttack(damage));
+            StartCoroutine(SingleWeaponAttack(weapon));
             return;
         }
 
-        // Limit to 3 selections
-        if (selectedAttacks.Count >= 3)
-        {
-            Debug.Log("Max 3 attacks!");
+        if (selectedWeapons.Count >= 3)
             return;
-        }
 
-        selectedAttacks.Add(damage);
-        Debug.Log("Selected attack: " + damage);
+        selectedWeapons.Add(weapon);
     }
 
-    IEnumerator ExecuteCombo()
+    IEnumerator SingleWeaponAttack(ItemData weapon)
     {
         playerTurn = false;
 
-        foreach (int dmg in selectedAttacks)
-        {
-            enemyHP -= dmg;
-            if (enemyHP < 0) enemyHP = 0;
+        playerAnimator.SetTrigger("Attack");
 
-            UpdateUI();
+        yield return new WaitForSeconds(0.3f);
 
-            yield return new WaitForSeconds(0.5f);
-
-            if (enemyHP <= 0)
-            {
-                enemyImage.gameObject.SetActive(false);
-                EndBattle(true);
-                if (GridManager.Instance != null)
-                {
-                    GridManager.Instance.ReturnFromBattle();
-                }
-                yield break;
-            }
-        }
-
-        // Enemy turn after combo
-        yield return new WaitForSeconds(0.5f);
-        EnemyTurn();
-    }
-
-    IEnumerator SingleAttack(int dmg)
-    {
-        playerTurn = false;
-
-        enemyHP -= dmg;
-        if (enemyHP < 0) enemyHP = 0;
+        enemyHP -= weapon.damage;
+        enemyHP = Mathf.Max(0, enemyHP);
 
         UpdateUI();
 
@@ -165,21 +131,90 @@ public class BattleManager : MonoBehaviour
 
         if (enemyHP <= 0)
         {
-            enemyImage.gameObject.SetActive(false);
-            EndBattle(true);
-            if (GridManager.Instance != null)
-            {
-                GridManager.Instance.ReturnFromBattle();
-            }
+            WinBattle();
             yield break;
         }
 
         EnemyTurn();
     }
 
-    public void Attack1() { SelectAttack(5); }
-    public void Attack2() { SelectAttack(10); }
-    public void Attack3() { SelectAttack(15); }
-    public void Attack4() { SelectAttack(20); }
-    public void Attack5() { SelectAttack(25); }
+    IEnumerator ExecuteCombo()
+    {
+        playerTurn = false;
+
+        foreach (ItemData weapon in selectedWeapons)
+        {
+            playerAnimator.SetTrigger("Attack");
+
+            yield return new WaitForSeconds(0.3f);
+            enemyHP -= weapon.damage;
+            enemyHP = Mathf.Max(0, enemyHP);
+            UpdateUI();
+
+            yield return new WaitForSeconds(0.5f);
+
+            if (enemyHP <= 0)
+            {
+                WinBattle();
+                yield break;
+            }
+        }
+
+        selectedWeapons.Clear();
+
+        yield return new WaitForSeconds(0.5f);
+
+        EnemyTurn();
+    }
+
+    void EnemyTurn()
+    {
+        if (battleEnded)
+            return;
+
+        playerAnimator.SetTrigger("Hurt");
+
+        playerHP -= enemyAttack;
+        playerHP = Mathf.Max(0, playerHP);
+
+        UpdateUI();
+
+        if (playerHP <= 0)
+        {
+            playerImage.gameObject.SetActive(false);
+            EndBattle(false);
+            return;
+        }
+
+        playerTurn = true;
+    }
+
+    void WinBattle()
+    {
+        enemyImage.gameObject.SetActive(false);
+        EndBattle(true);
+
+        if (GridManager.Instance.finalBattleTriggered)
+        {
+            GridManager.Instance.StartCoroutine(
+                GridManager.Instance.ReturnAndShowVictory()
+            );
+        }
+        else
+        {
+            GridManager.Instance.ReturnFromBattle();
+        }
+    }
+
+    void EndBattle(bool playerWon)
+    {
+        battleEnded = true;
+        resultText.text = playerWon ? "YOU WIN!" : "YOU LOSE!";
+    }
+
+    void UpdateUI()
+    {
+        playerHealthSlider.value = playerHP;
+        enemyHealthSlider.value = enemyHP;
+    }
 }

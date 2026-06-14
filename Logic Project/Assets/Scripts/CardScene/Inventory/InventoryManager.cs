@@ -1,10 +1,10 @@
-using Microsoft.Unity.VisualStudio.Editor;
 using Unity.VisualScripting;
 using UnityEngine;
 
 public class InventoryManager : MonoBehaviour
 {
     public InventorySlot[] slots;
+    public ItemData[] starter;
 
     private int currentIndex = 0;
 
@@ -14,6 +14,11 @@ public class InventoryManager : MonoBehaviour
         for (int i = 0; i < slots.Length; i++)
         {
             slots[i].slotIndex = i;
+        }
+
+        foreach (ItemData item in starter)
+        {
+            AddItem(item);
         }
         Debug.Log("Slots found: " + slots.Length);
     }
@@ -37,8 +42,7 @@ public class InventoryManager : MonoBehaviour
 
         for(int i = index; i < currentIndex - 1; i++)
         {
-            slots[i].icon.sprite = slots[i + 1].icon.sprite;
-            slots[i].icon.color = slots[i + 1].icon.color;
+            slots[i].CopyFrom(slots[i + 1]);
         }
 
         slots[currentIndex - 1].RemoveItem();    

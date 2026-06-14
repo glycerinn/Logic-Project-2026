@@ -15,6 +15,7 @@ public class ItemData : ScriptableObject
 
     public Sprite icon;
 
-    [TextArea]
-    public string description;
+    public int damage;
+
+    public int maxDurability = 10;
 }

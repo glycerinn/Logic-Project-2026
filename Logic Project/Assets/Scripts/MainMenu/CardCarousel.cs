@@ -60,9 +60,39 @@ public class CardCarousel : MonoBehaviour
         targetRotation -= angleSpread / cards.Count;
     }
 
+    public void RefreshCards()
+    {
+        cards.Clear();
+
+        foreach (Transform child in transform)
+        {
+            RectTransform rect = child as RectTransform;
+
+            if (rect != null)
+            {
+                cards.Add(rect);
+            }
+        }
+
+        ArrangeCards();
+    }
+
     void ArrangeCards()
     {
         if (cards.Count == 0) return;
+
+        if (cards.Count == 1)
+        {
+            RectTransform card = cards[0];
+
+            card.localEulerAngles = Vector3.zero;
+            card.localScale = Vector3.one;
+            card.localScale = Vector3.one * maxScale;
+
+            card.anchoredPosition = new Vector2(0, 60f);
+
+            return;
+        }
 
         float step = angleSpread / (cards.Count - 1);
         float startAngle = -angleSpread / 2f;
