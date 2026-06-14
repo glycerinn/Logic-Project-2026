@@ -25,6 +25,7 @@ public class GridManager : MonoBehaviour
     public TileData[] materialTiles;
     public TileData[] enemyTiles;
     public TileData[] weaponTiles;
+    public TileData coinTileData;
 
     [Header("Movement")]
     public float moveSpeed = 12f;
@@ -148,6 +149,12 @@ public class GridManager : MonoBehaviour
             tile.transform.SetAsLastSibling();
 
             TileData data = GetRandomTileFromType(columnType);
+
+            if (columnType == TileType.Material && Random.value < 0.8f)
+            {
+                Debug.Log("Coin spawned!");
+                data = coinTileData;
+            }
 
             tile.tileData = data;
             tile.hasItem = true;
@@ -289,7 +296,17 @@ public class GridManager : MonoBehaviour
         gridRect.anchoredPosition = targetPos;
         CleanupColumns();
 
-        if (chosenTile.hasItem && chosenTile.tileData.itemReward != null)
+       if (chosenTile.tileData.isCoin)
+        {
+            CoinManager.Instance.AddCoins(chosenTile.tileData.coinValue);
+            chosenTile.hasItem = false;
+
+            if (chosenTile.tileImage != null)
+            {
+                chosenTile.tileImage.enabled = false;
+            }
+        }
+        else if (chosenTile.hasItem && chosenTile.tileData.itemReward != null)
         {
             inventoryManager.AddItem(chosenTile.tileData.itemReward);
             chosenTile.hasItem = false;

@@ -7,13 +7,12 @@ using System.Collections.Generic;
 public class BattleManager : MonoBehaviour
 {
     public static BattleManager Instance;
-
-    public TextMeshProUGUI playerHPText;
-    public TextMeshProUGUI enemyHPText;
     public TextMeshProUGUI resultText;
 
     public Image playerImage;
     public Image enemyImage;
+    public Slider playerHealthSlider;
+    public Slider enemyHealthSlider;
 
     public GameObject cardPrefab;
     public Transform cardParent;
@@ -46,6 +45,14 @@ public class BattleManager : MonoBehaviour
             enemyHP = enemyData.maxHP;
             enemyAttack = enemyData.attack;
         }
+
+        playerHealthSlider.minValue = 0;
+        playerHealthSlider.maxValue = playerHP;
+        playerHealthSlider.value = playerHP;
+
+        enemyHealthSlider.minValue = 0;
+        enemyHealthSlider.maxValue = enemyHP;
+        enemyHealthSlider.value = enemyHP;
 
         CreateWeaponCards();
 
@@ -207,7 +214,7 @@ public class BattleManager : MonoBehaviour
 
     void UpdateUI()
     {
-        playerHPText.text = $"Player HP: {playerHP}";
-        enemyHPText.text = $"Enemy HP: {enemyHP}";
+        playerHealthSlider.value = playerHP;
+        enemyHealthSlider.value = enemyHP;
     }
 }

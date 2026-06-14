@@ -14,6 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::TileData
   tileName: Token
   type: 0
+  isCoin: 1
+  coinValue: 1
   sprite: {fileID: 6500381883553370307, guid: b2eb49275b7c4714db6294bf974bc1ae, type: 3}
   color: {r: 1, g: 1, b: 1, a: 1}
   maxHP: 0

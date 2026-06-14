@@ -1,0 +1,468 @@
+fileFormatVersion: 2
+guid: 117c2a2031ed01d4599ee68fefca1cd2
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -6215631234493354937
+    second: PROGRESS_UI_0
+  - first:
+      213: 5118699636962835782
+    second: PROGRESS_UI_1
+  - first:
+      213: 6073092164120217625
+    second: PROGRESS_UI_2
+  - first:
+      213: 6103841136501231395
+    second: PROGRESS_UI_3
+  - first:
+      213: -7231015483907483450
+    second: PROGRESS_UI_4
+  - first:
+      213: 9067020168940162452
+    second: PROGRESS_UI_5
+  - first:
+      213: -6576259340907935138
+    second: PROGRESS_UI_6
+  - first:
+      213: -2457325075544755922
+    second: PROGRESS_UI_7
+  - first:
+      213: -2530440671810677334
+    second: PROGRESS_UI_8
+  - first:
+      213: 5763034374196295632
+    second: PROGRESS_UI_9
+  - first:
+      213: 1431438276584710338
+    second: PROGRESS_UI_10
+  - first:
+      213: 162379709660034917
+    second: PROGRESS_UI_11
+  - first:
+      213: 2016124842740682063
+    second: PROGRESS_UI_12
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: PROGRESS_UI_0
+      rect:
+        serializedVersion: 2
+        x: 1590
+        y: 587
+        width: 21
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 74c6335f254adb9a0800000000000000
+      internalID: -6215631234493354937
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PROGRESS_UI_1
+      rect:
+        serializedVersion: 2
+        x: 1613
+        y: 587
+        width: 9
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 64d37152336490740800000000000000
+      internalID: 5118699636962835782
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PROGRESS_UI_2
+      rect:
+        serializedVersion: 2
+        x: 1624
+        y: 587
+        width: 24
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 918089a8525f74450800000000000000
+      internalID: 6073092164120217625
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PROGRESS_UI_3
+      rect:
+        serializedVersion: 2
+        x: 1649
+        y: 587
+        width: 31
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 32f82929c2335b450800000000000000
+      internalID: 6103841136501231395
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PROGRESS_UI_4
+      rect:
+        serializedVersion: 2
+        x: 1680
+        y: 587
+        width: 21
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6c8585c9ab546ab90800000000000000
+      internalID: -7231015483907483450
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PROGRESS_UI_5
+      rect:
+        serializedVersion: 2
+        x: 1716
+        y: 587
+        width: 23
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 49d0bf4fdc684dd70800000000000000
+      internalID: 9067020168940162452
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PROGRESS_UI_6
+      rect:
+        serializedVersion: 2
+        x: 1738
+        y: 587
+        width: 31
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e5a8652d8fe6cb4a0800000000000000
+      internalID: -6576259340907935138
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PROGRESS_UI_7
+      rect:
+        serializedVersion: 2
+        x: 1769
+        y: 587
+        width: 23
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e21be7efcd3d5edd0800000000000000
+      internalID: -2457325075544755922
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PROGRESS_UI_8
+      rect:
+        serializedVersion: 2
+        x: 1792
+        y: 587
+        width: 22
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: aa51687ad9112ecd0800000000000000
+      internalID: -2530440671810677334
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PROGRESS_UI_9
+      rect:
+        serializedVersion: 2
+        x: 1817
+        y: 587
+        width: 21
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0d7f55eba396aff40800000000000000
+      internalID: 5763034374196295632
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PROGRESS_UI_10
+      rect:
+        serializedVersion: 2
+        x: 1839
+        y: 587
+        width: 23
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2c0aab9478d7dd310800000000000000
+      internalID: 1431438276584710338
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PROGRESS_UI_11
+      rect:
+        serializedVersion: 2
+        x: 1689
+        y: 515
+        width: 73
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 56774015c73e04200800000000000000
+      internalID: 162379709660034917
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PROGRESS_UI_12
+      rect:
+        serializedVersion: 2
+        x: 71
+        y: 465
+        width: 1660
+        height: 42
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f4d0662dcd6bafb10800000000000000
+      internalID: 2016124842740682063
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      PROGRESS_UI_0: -6215631234493354937
+      PROGRESS_UI_1: 5118699636962835782
+      PROGRESS_UI_10: 1431438276584710338
+      PROGRESS_UI_11: 162379709660034917
+      PROGRESS_UI_12: 2016124842740682063
+      PROGRESS_UI_2: 6073092164120217625
+      PROGRESS_UI_3: 6103841136501231395
+      PROGRESS_UI_4: -7231015483907483450
+      PROGRESS_UI_5: 9067020168940162452
+      PROGRESS_UI_6: -6576259340907935138
+      PROGRESS_UI_7: -2457325075544755922
+      PROGRESS_UI_8: -2530440671810677334
+      PROGRESS_UI_9: 5763034374196295632
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
