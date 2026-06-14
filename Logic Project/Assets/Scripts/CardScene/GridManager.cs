@@ -16,7 +16,6 @@ public class GridManager : MonoBehaviour
     public int visibleColumns = 6;
     public int maxColumnsLeft = 2;
     private int totalColumnsCreated = 0;
-    private int columnsTraversed = 0;
     public int maxColumns = 10;
     private int nextEnemyColumn = 3;
 
@@ -41,6 +40,9 @@ public class GridManager : MonoBehaviour
     private List<List<DropTile>> columns = new List<List<DropTile>>();
     private int activeColumn = 0;
     private float cellWidth;
+
+    [Header("UI")]
+    public Slider progressSlider;
     
 
     void Awake()
@@ -50,6 +52,9 @@ public class GridManager : MonoBehaviour
 
     void Start()
     {
+        progressSlider.minValue = 0;
+        progressSlider.maxValue = maxColumns;
+        progressSlider.value = 0;
         nextEnemyColumn = Random.Range(3, 5);
         GridLayoutGroup layout = gridParent.GetComponent<GridLayoutGroup>();
         cellWidth = layout.cellSize.x + layout.spacing.x;
@@ -64,6 +69,8 @@ public class GridManager : MonoBehaviour
 
     void CreateColumn()
     {
+        if (totalColumnsCreated >= maxColumns) return;
+        bool isBossColumn = totalColumnsCreated == maxColumns - 1;
         List<DropTile> newColumn = new List<DropTile>();
         TileType columnType;
 
@@ -94,6 +101,12 @@ public class GridManager : MonoBehaviour
             TileData data = GetRandomTileFromType(columnType);
 
             tile.tileData = data;
+
+            if (isBossColumn)
+            {
+                tile.isBossTile = true;
+            }
+
             tile.ApplyVisuals();
             newColumn.Add(tile);
         }
@@ -101,11 +114,13 @@ public class GridManager : MonoBehaviour
         columns.Add(newColumn);
 
         totalColumnsCreated++;
+        Debug.Log("Total columns created: " + totalColumnsCreated);
     }
 
 
     void RecycleLeftColumn()
     {
+        if (finalBattleTriggered || totalColumnsCreated >= maxColumns) return;
         List<DropTile> recycledColumn = columns[0];
 
         columns.RemoveAt(0);
@@ -241,21 +256,19 @@ public class GridManager : MonoBehaviour
         cardRect.localScale = Vector3.one;
 
         activeColumn++;
-        columnsTraversed++;
+
+        progressSlider.value = totalColumnsCreated - (columns.Count - activeColumn);
         
-        if (columnsTraversed >= maxColumns && !finalBattleTriggered)
+        if (chosenTile.isBossTile && !finalBattleTriggered)
         {
             finalBattleTriggered = true;
-
-            RestoreDurability(3);
-            BattleData.currentEnemy = enemyTiles[0]; // your boss
+            BattleData.currentEnemy = chosenTile.tileData;
             StartCoroutine(EnterBattle());
 
             yield break;
         }
 
         ReduceAllDurability(1);
-
         UpdateActiveColumn();
 
         RectTransform gridRect = gridParent.GetComponent<RectTransform>();
@@ -274,13 +287,11 @@ public class GridManager : MonoBehaviour
         }
 
         gridRect.anchoredPosition = targetPos;
-
         CleanupColumns();
 
         if (chosenTile.hasItem && chosenTile.tileData.itemReward != null)
         {
             inventoryManager.AddItem(chosenTile.tileData.itemReward);
-
             chosenTile.hasItem = false;
 
             if (chosenTile.tileImage != null)
@@ -299,8 +310,8 @@ public class GridManager : MonoBehaviour
 
     void CleanupColumns()
     {
-        if (finalBattleTriggered)
-            return;
+        if (totalColumnsCreated >= maxColumns)
+        return;
 
         if (activeColumn > maxColumnsLeft)
         {
@@ -310,6 +321,7 @@ public class GridManager : MonoBehaviour
             RectTransform gridRect = gridParent.GetComponent<RectTransform>();
             gridRect.anchoredPosition += new Vector2(cellWidth, 0);
         }
+        Debug.Log("Final battle triggered: " + finalBattleTriggered);
     }
 
 
@@ -430,6 +442,4 @@ public class GridManager : MonoBehaviour
     {
         victoryPanel.SetActive(true);
     }
-
-    
 }

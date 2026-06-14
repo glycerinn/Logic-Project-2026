@@ -10,6 +10,7 @@ public class DropTile : MonoBehaviour, IDropHandler
 
     public bool hasItem = true;
     public bool isLocked = false;
+    public bool isBossTile;
 
     void Start()
     {

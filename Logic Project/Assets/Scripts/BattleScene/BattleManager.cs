@@ -45,8 +45,6 @@ public class BattleManager : MonoBehaviour
             enemyImage.sprite = enemyData.sprite;
             enemyHP = enemyData.maxHP;
             enemyAttack = enemyData.attack;
-
-            Debug.Log("Fighting: " + enemyData.tileName);
         }
 
         CreateWeaponCards();
@@ -107,10 +105,6 @@ public class BattleManager : MonoBehaviour
             return;
 
         selectedWeapons.Add(weapon);
-
-        Debug.Log(
-            $"Selected {weapon.itemName} ({weapon.damage} dmg)"
-        );
     }
 
     IEnumerator SingleWeaponAttack(ItemData weapon)
@@ -148,11 +142,6 @@ public class BattleManager : MonoBehaviour
             yield return new WaitForSeconds(0.3f);
             enemyHP -= weapon.damage;
             enemyHP = Mathf.Max(0, enemyHP);
-
-            Debug.Log(
-                $"{weapon.itemName} dealt {weapon.damage}"
-            );
-
             UpdateUI();
 
             yield return new WaitForSeconds(0.5f);
