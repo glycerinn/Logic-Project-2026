@@ -17,6 +17,7 @@ public class BattleManager : MonoBehaviour
     public GameObject cardPrefab;
     public Transform cardParent;
     public Animator playerAnimator;
+    public Animator enemyAnimator;
 
     private List<ItemData> selectedWeapons = new();
 
@@ -145,6 +146,10 @@ public class BattleManager : MonoBehaviour
 
         yield return new WaitForSeconds(0.3f);
 
+        enemyAnimator.SetTrigger("EnemyHurt");
+
+        yield return new WaitForSeconds(0.1f);
+
         enemyHP -= weapon.damage;
         enemyHP = Mathf.Max(0, enemyHP);
 
@@ -178,6 +183,11 @@ public class BattleManager : MonoBehaviour
             playerAnimator.SetTrigger("Attack");
 
             yield return new WaitForSeconds(0.3f);
+
+            enemyAnimator.SetTrigger("EnemyHurt");
+
+            yield return new WaitForSeconds(0.1f);
+
             enemyHP -= weapon.damage;
             enemyHP = Mathf.Max(0, enemyHP);
             UpdateUI();
@@ -202,6 +212,8 @@ public class BattleManager : MonoBehaviour
     {
         if (battleEnded)
             return;
+
+        enemyAnimator.SetTrigger("EnemyAttack");
 
         playerAnimator.SetTrigger("Hurt");
 

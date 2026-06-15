@@ -1351,6 +1351,7 @@ MonoBehaviour:
   cardPrefab: {fileID: 113028502602967828, guid: a0b22bc423e366544ba142ba4aa3129c, type: 3}
   cardParent: {fileID: 1323760130}
   playerAnimator: {fileID: 424784580}
+  enemyAnimator: {fileID: 1800117878}
   energySlider: {fileID: 1213947871}
   maxEnergy: 5
 --- !u!1 &1240795028
@@ -2026,6 +2027,7 @@ GameObject:
   - component: {fileID: 1800117875}
   - component: {fileID: 1800117877}
   - component: {fileID: 1800117876}
+  - component: {fileID: 1800117878}
   m_Layer: 5
   m_Name: Enemy
   m_TagString: Untagged
@@ -2090,6 +2092,28 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1800117874}
   m_CullTransparentMesh: 1
+--- !u!95 &1800117878
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1800117874}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: f42bb05f6f6aa3544b65457f09b226d5, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1991461702
 GameObject:
   m_ObjectHideFlags: 0

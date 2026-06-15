@@ -2903,9 +2903,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 7e137381d53062b448ea5f19f10b4c7f, type: 2}
   enemyTiles:
   - {fileID: 11400000, guid: f5190b19f19540045b5735f3bcf7f30b, type: 2}
-  - {fileID: 11400000, guid: a61813f88064ac7418044364f7acc02b, type: 2}
-  - {fileID: 11400000, guid: 06ee78c2ae525d24eb907454c47033eb, type: 2}
-  - {fileID: 11400000, guid: 5d322adfd37500f41934a4b092035117, type: 2}
   weaponTiles:
   - {fileID: 11400000, guid: 41a4e20629fa8f347b8106684e6bc3ee, type: 2}
   - {fileID: 11400000, guid: 61acb4afa3e9b284192395d4a8ead4a7, type: 2}
