@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ffb03933c9ae5b4e81932d5d97493f6, type: 3}
+  m_Name: Gatling
+  m_EditorClassIdentifier: Assembly-CSharp::TileData
+  tileName: Gatling
+  type: 0
+  isCoin: 0
+  coinValue: 1
+  sprite: {fileID: -2533642752756409590, guid: 33496b9be0afe784e88339f10a00ac12, type: 3}
+  color: {r: 1, g: 1, b: 1, a: 1}
+  maxHP: 0
+  attack: 0
+  itemReward: {fileID: 11400000, guid: 66f14a5ed6b899e42b8c32a7516257ab, type: 2}

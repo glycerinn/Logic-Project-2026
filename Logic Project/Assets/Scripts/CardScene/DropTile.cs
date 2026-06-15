@@ -11,6 +11,7 @@ public class DropTile : MonoBehaviour, IDropHandler
     public bool hasItem = true;
     public bool isLocked = false;
     public bool isBossTile;
+    public bool isEnemy;
 
     void Start()
     {
@@ -23,7 +24,15 @@ public class DropTile : MonoBehaviour, IDropHandler
 
         tileImage.sprite = tileData.sprite;
         tileImage.color = tileData.color;
-        tileImage.rectTransform.localEulerAngles = new Vector3(0, 0, -90);
+
+        if (tileData.type == TileType.Enemy)
+        {
+            tileImage.rectTransform.localEulerAngles = Vector3.zero;
+        }
+        else
+        {
+            tileImage.rectTransform.localEulerAngles = new Vector3(0, 0, -90);
+        }
     }
 
     public void OnDrop(PointerEventData eventData)

@@ -14,8 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::TileData
   tileName: EnemyTile
   type: 1
-  sprite: {fileID: 310519073987823814, guid: 319f1982c2f0b2142ad4830540ce22b1, type: 3}
+  isCoin: 0
+  coinValue: 1
+  sprite: {fileID: 2522721553005819818, guid: 7e06f188910b39a40ae5bd2c2ff7ce3b, type: 3}
   color: {r: 1, g: 1, b: 1, a: 1}
-  maxHP: 30
-  attack: 4
+  maxHP: 100
+  attack: 5
   itemReward: {fileID: 0}
