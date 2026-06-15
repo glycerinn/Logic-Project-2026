@@ -130,10 +130,10 @@ TextureImporter:
         serializedVersion: 2
         x: 141
         y: 289
-        width: 502
+        width: 1641
         height: 502
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -146,99 +146,11 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
-    - serializedVersion: 2
-      name: QuitButton_UI_1
-      rect:
-        serializedVersion: 2
-        x: 826
-        y: 371
-        width: 238
-        height: 338
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 0a6806d6ec6015920800000000000000
-      internalID: 2977168312336680608
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: QuitButton_UI_2
-      rect:
-        serializedVersion: 2
-        x: 1122
-        y: 397
-        width: 238
-        height: 312
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 51d2b31010aef40d0800000000000000
-      internalID: -3436270700623876843
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: QuitButton_UI_3
-      rect:
-        serializedVersion: 2
-        x: 1419
-        y: 397
-        width: 74
-        height: 312
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 408cdcb93bbadcd00800000000000000
-      internalID: 994639880620197892
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: QuitButton_UI_4
-      rect:
-        serializedVersion: 2
-        x: 1534
-        y: 397
-        width: 244
-        height: 312
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 48e23c6825dfa0ce0800000000000000
-      internalID: -1438058600101368188
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
     outline: []
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: f3e46e54936e7e840b8aa0d8b0d07cce
     internalID: 0
     vertices: []
     indices: 

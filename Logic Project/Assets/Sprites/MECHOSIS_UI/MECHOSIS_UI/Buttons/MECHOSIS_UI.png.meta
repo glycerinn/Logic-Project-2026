@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: fe5e521f63918464d97ee3d471d196b0
+guid: cb1f044f10cbc5948912d3eba0bce033
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 9017000814029120819
-    second: Panel_UI_0
+      213: 7192018840763277699
+    second: MECHOSIS_UI_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,23 +113,23 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Panel_UI_0
+      name: MECHOSIS_UI_0
       rect:
         serializedVersion: 2
-        x: 659
-        y: 89
-        width: 602
-        height: 902
+        x: 59
+        y: 59
+        width: 1802
+        height: 252
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 71, y: 68, z: 59, w: 68}
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 3352d9b5772d22d70800000000000000
-      internalID: 9017000814029120819
+      spriteID: 381ac9dd70f2fc360800000000000000
+      internalID: 7192018840763277699
       vertices: []
       indices: 
       edges: []
@@ -138,7 +138,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 57c8cefef9f4dc441aedffd018eaccd3
+    spriteID: 
     internalID: 0
     vertices: []
     indices: 
@@ -148,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Panel_UI_0: 9017000814029120819
+      MECHOSIS_UI_0: 7192018840763277699
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

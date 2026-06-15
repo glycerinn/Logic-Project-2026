@@ -18,34 +18,10 @@ public class MainMenuManager : MonoBehaviour
     {
         
     }
-
+    
     public void OnPlay()
     {
-        MissionPanel.SetActive(true);
-        MainMenuPanel.SetActive(false);
-    }
-
-    public void OnMission()
-    {
-        CharacterPanel.SetActive(true);
-        MissionPanel.SetActive(false);
-    }
-
-    public void OnCharacter()
-    {
         SceneManager.LoadScene("SampleScene");
-    }
-
-    public void OnBackCharacter()
-    {
-        MissionPanel.SetActive(true);
-        CharacterPanel.SetActive(false);
-    }
-
-    public void OnBackMission()
-    {
-        MainMenuPanel.SetActive(true);
-        MissionPanel.SetActive(false);
     }
 
     public void Quit()

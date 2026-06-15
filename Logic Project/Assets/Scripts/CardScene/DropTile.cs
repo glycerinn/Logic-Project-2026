@@ -19,21 +19,21 @@ public class DropTile : MonoBehaviour, IDropHandler
     }
 
     public void ApplyVisuals()
-{
-    if (tileData == null || tileImage == null) return;
-
-    tileImage.sprite = tileData.sprite;
-    tileImage.color = tileData.color;
-
-    if (tileData.type == TileType.Enemy)
     {
-        tileImage.rectTransform.localEulerAngles = Vector3.zero;
+        if (tileData == null || tileImage == null) return;
+
+        tileImage.sprite = tileData.sprite;
+        tileImage.color = tileData.color;
+
+        if (tileData.type == TileType.Enemy)
+        {
+            tileImage.rectTransform.localEulerAngles = Vector3.zero;
+        }
+        else
+        {
+            tileImage.rectTransform.localEulerAngles = new Vector3(0, 0, -90);
+        }
     }
-    else
-    {
-        tileImage.rectTransform.localEulerAngles = new Vector3(0, 0, -90);
-    }
-}
 
     public void OnDrop(PointerEventData eventData)
     {

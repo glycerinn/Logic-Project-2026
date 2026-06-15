@@ -26,7 +26,10 @@ public class DraggableCard : MonoBehaviour,
         originalPosition = rectTransform.anchoredPosition;
         wasDropped = false;
         
-        transform.SetParent(dragLayer, true);
+        transform.SetParent(dragLayer, false);
+
+        rectTransform.position = eventData.position;
+        rectTransform.localRotation = Quaternion.Euler(0, 0, 0);
 
         canvasGroup.blocksRaycasts = false;
         canvasGroup.alpha = 0.6f;
@@ -34,7 +37,19 @@ public class DraggableCard : MonoBehaviour,
 
     public void OnDrag(PointerEventData eventData)
     {
-        rectTransform.position = eventData.position;
+        RectTransform canvasRect =
+            dragLayer.GetComponentInParent<Canvas>().GetComponent<RectTransform>();
+
+        Vector2 localPoint;
+
+        RectTransformUtility.ScreenPointToLocalPointInRectangle(
+            canvasRect,
+            eventData.position,
+            eventData.pressEventCamera,
+            out localPoint
+        );
+
+        rectTransform.anchoredPosition = localPoint;
     }
 
     public void OnEndDrag(PointerEventData eventData)

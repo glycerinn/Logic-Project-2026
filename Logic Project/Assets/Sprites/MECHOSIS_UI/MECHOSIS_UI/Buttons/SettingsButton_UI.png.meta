@@ -142,10 +142,10 @@ TextureImporter:
         serializedVersion: 2
         x: 37
         y: 370
-        width: 340
+        width: 1853
         height: 340
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -158,187 +158,11 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
-    - serializedVersion: 2
-      name: SettingsButton_UI_1
-      rect:
-        serializedVersion: 2
-        x: 498
-        y: 444
-        width: 160
-        height: 212
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 3c97d8af3fc0f8ad0800000000000000
-      internalID: -2697923409751475773
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: SettingsButton_UI_2
-      rect:
-        serializedVersion: 2
-        x: 691
-        y: 444
-        width: 147
-        height: 212
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 8d45475a946895290800000000000000
-      internalID: -7901136420378225448
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: SettingsButton_UI_3
-      rect:
-        serializedVersion: 2
-        x: 862
-        y: 444
-        width: 166
-        height: 212
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: c0600b0440f2cf240800000000000000
-      internalID: 4826784595945981452
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: SettingsButton_UI_4
-      rect:
-        serializedVersion: 2
-        x: 1041
-        y: 444
-        width: 166
-        height: 212
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 0f6785a93fd44d480800000000000000
-      internalID: -8875383256978524432
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: SettingsButton_UI_5
-      rect:
-        serializedVersion: 2
-        x: 1232
-        y: 444
-        width: 51
-        height: 212
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 8e1e3181b14fd0210800000000000000
-      internalID: 1300964264585191912
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: SettingsButton_UI_6
-      rect:
-        serializedVersion: 2
-        x: 1318
-        y: 444
-        width: 176
-        height: 212
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: ebecd5423e6905990800000000000000
-      internalID: -7399248285457854786
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: SettingsButton_UI_7
-      rect:
-        serializedVersion: 2
-        x: 1531
-        y: 444
-        width: 160
-        height: 212
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 3e7a4fcba028d43a0800000000000000
-      internalID: -6679539689689143325
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: SettingsButton_UI_8
-      rect:
-        serializedVersion: 2
-        x: 1723
-        y: 444
-        width: 160
-        height: 212
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 5262aef23923e6d20800000000000000
-      internalID: 3273609586890384933
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
     outline: []
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 2ad6a28ce6e75c84d98cadfbabc392ba
     internalID: 0
     vertices: []
     indices: 

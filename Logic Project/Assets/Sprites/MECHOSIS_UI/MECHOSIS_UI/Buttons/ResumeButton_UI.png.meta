@@ -136,10 +136,10 @@ TextureImporter:
         serializedVersion: 2
         x: 70
         y: 352
-        width: 375
+        width: 1785
         height: 375
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -152,143 +152,11 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
-    - serializedVersion: 2
-      name: ResumeButton_UI_1
-      rect:
-        serializedVersion: 2
-        x: 574
-        y: 433
-        width: 186
-        height: 233
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 67a14f01b635f6bb0800000000000000
-      internalID: -4940638546891105674
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: ResumeButton_UI_2
-      rect:
-        serializedVersion: 2
-        x: 777
-        y: 433
-        width: 161
-        height: 233
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 192702ca232638510800000000000000
-      internalID: 1550190666521277073
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: ResumeButton_UI_3
-      rect:
-        serializedVersion: 2
-        x: 975
-        y: 433
-        width: 176
-        height: 233
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: a78e6b79a873da290800000000000000
-      internalID: -7877579104810768262
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: ResumeButton_UI_4
-      rect:
-        serializedVersion: 2
-        x: 1189
-        y: 433
-        width: 178
-        height: 233
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: ecb3e566bda53e920800000000000000
-      internalID: 3018356073630153678
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: ResumeButton_UI_5
-      rect:
-        serializedVersion: 2
-        x: 1406
-        y: 433
-        width: 243
-        height: 233
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 72809529ff5d06080800000000000000
-      internalID: -9196115145441867737
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: ResumeButton_UI_6
-      rect:
-        serializedVersion: 2
-        x: 1688
-        y: 433
-        width: 161
-        height: 233
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 807db958cc02ebaa0800000000000000
-      internalID: -6143436778899777784
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
     outline: []
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 2687f9bea32240149b725b0bc482cff4
     internalID: 0
     vertices: []
     indices: 

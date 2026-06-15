@@ -1,10 +1,31 @@
 fileFormatVersion: 2
-guid: fe5e521f63918464d97ee3d471d196b0
+guid: cce8b07432caf1846991688454db5705
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 9017000814029120819
-    second: Panel_UI_0
+      213: -3398249865016736890
+    second: CreditsButton_UI_0
+  - first:
+      213: -4862831569688944975
+    second: CreditsButton_UI_1
+  - first:
+      213: -7367243424197020058
+    second: CreditsButton_UI_2
+  - first:
+      213: 4904884964820564594
+    second: CreditsButton_UI_3
+  - first:
+      213: 7162768520711842675
+    second: CreditsButton_UI_4
+  - first:
+      213: 7415881318765341888
+    second: CreditsButton_UI_5
+  - first:
+      213: 6863915107216327950
+    second: CreditsButton_UI_6
+  - first:
+      213: -643616144709992953
+    second: CreditsButton_UI_7
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,23 +134,23 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Panel_UI_0
+      name: CreditsButton_UI_0
       rect:
         serializedVersion: 2
-        x: 659
-        y: 89
-        width: 602
-        height: 902
+        x: 149
+        y: 370
+        width: 1631
+        height: 340
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 71, y: 68, z: 59, w: 68}
+      border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 3352d9b5772d22d70800000000000000
-      internalID: 9017000814029120819
+      spriteID: 68388a1a0cdf6d0d0800000000000000
+      internalID: -3398249865016736890
       vertices: []
       indices: 
       edges: []
@@ -138,7 +159,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 57c8cefef9f4dc441aedffd018eaccd3
+    spriteID: c386ff3104cb48d458268fb27a29a824
     internalID: 0
     vertices: []
     indices: 
@@ -148,7 +169,14 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Panel_UI_0: 9017000814029120819
+      CreditsButton_UI_0: -3398249865016736890
+      CreditsButton_UI_1: -4862831569688944975
+      CreditsButton_UI_2: -7367243424197020058
+      CreditsButton_UI_3: 4904884964820564594
+      CreditsButton_UI_4: 7162768520711842675
+      CreditsButton_UI_5: 7415881318765341888
+      CreditsButton_UI_6: 6863915107216327950
+      CreditsButton_UI_7: -643616144709992953
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

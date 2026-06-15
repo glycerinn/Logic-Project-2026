@@ -130,10 +130,10 @@ TextureImporter:
         serializedVersion: 2
         x: 34
         y: 289
-        width: 502
+        width: 1856
         height: 502
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -146,99 +146,11 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
-    - serializedVersion: 2
-      name: PlayButton_UI_1
-      rect:
-        serializedVersion: 2
-        x: 711
-        y: 397
-        width: 233
-        height: 312
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: d536d455991890de0800000000000000
-      internalID: -1366418516369120419
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: PlayButton_UI_2
-      rect:
-        serializedVersion: 2
-        x: 994
-        y: 397
-        width: 216
-        height: 312
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 6fe6465bc21477250800000000000000
-      internalID: 5942289893616283382
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: PlayButton_UI_3
-      rect:
-        serializedVersion: 2
-        x: 1240
-        y: 397
-        width: 331
-        height: 312
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: a779bbd04a6ff1c30800000000000000
-      internalID: 4332452551019173754
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: PlayButton_UI_4
-      rect:
-        serializedVersion: 2
-        x: 1583
-        y: 397
-        width: 302
-        height: 312
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 0cbb747b6854e8c50800000000000000
-      internalID: 6669344543085149120
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
     outline: []
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 4f744ee223e4b8b4498399b08dc6249b
     internalID: 0
     vertices: []
     indices: 
