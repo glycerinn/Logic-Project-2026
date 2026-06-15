@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4f66cfc4b6f90e9418d888677f19a709, type: 3}
-  m_Name: HandCannon
+  m_Name: SpecialKnifeArm
   m_EditorClassIdentifier: Assembly-CSharp::ItemData
-  itemName: Handcannon
+  itemName: SKA
   itemType: 1
-  icon: {fileID: 8766863098361882804, guid: b4f720c56a322b740851af56f9c5828e, type: 3}
-  damage: 25
+  icon: {fileID: -7875529888739998290, guid: dae329d8e4b0dba4284d6f1564a8b820, type: 3}
+  damage: 30
   energyCost: 1
   maxDurability: 10

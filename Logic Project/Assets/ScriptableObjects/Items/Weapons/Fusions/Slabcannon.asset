@@ -10,9 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4f66cfc4b6f90e9418d888677f19a709, type: 3}
-  m_Name: Jackhammer
+  m_Name: Slabcannon
   m_EditorClassIdentifier: Assembly-CSharp::ItemData
-  itemName: Jackhammer
+  itemName: Slabcannon
   itemType: 1
-  icon: {fileID: 8675677168784275166, guid: 4c797501b51ff0e4a8d80529e0eac065, type: 3}
-  damage: 45
+  icon: {fileID: -2700439039883030302, guid: 1bec9c41af8345d409e7879cb68ad696, type: 3}
+  damage: 50
+  energyCost: 1
+  maxDurability: 10

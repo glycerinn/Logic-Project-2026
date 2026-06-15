@@ -29,6 +29,10 @@ public class BattleManager : MonoBehaviour
     private int enemyAttack;
 
     private TileData enemyData;
+    [Header("Energy")]
+    public Slider energySlider;
+    public int maxEnergy = 5;
+    private int currentEnergy;
 
     void Awake()
     {
@@ -53,6 +57,12 @@ public class BattleManager : MonoBehaviour
         enemyHealthSlider.minValue = 0;
         enemyHealthSlider.maxValue = enemyHP;
         enemyHealthSlider.value = enemyHP;
+
+        currentEnergy = maxEnergy;
+
+        energySlider.minValue = 0;
+        energySlider.maxValue = maxEnergy;
+        energySlider.value = currentEnergy;
 
         CreateWeaponCards();
 
@@ -104,6 +114,9 @@ public class BattleManager : MonoBehaviour
 
         if (!isSelecting)
         {
+            if (!HasEnoughEnergy(weapon.energyCost))
+                return;
+
             StartCoroutine(SingleWeaponAttack(weapon));
             return;
         }
@@ -111,13 +124,23 @@ public class BattleManager : MonoBehaviour
         if (selectedWeapons.Count >= 3)
             return;
 
+        int currentCost = 0;
+
+        foreach(ItemData selected in selectedWeapons)
+        {
+            currentCost += selected.energyCost;
+        }
+
+        if (currentCost + weapon.energyCost > currentEnergy)
+            return;
+
         selectedWeapons.Add(weapon);
     }
 
     IEnumerator SingleWeaponAttack(ItemData weapon)
     {
+        SpendEnergy(weapon.energyCost);
         playerTurn = false;
-
         playerAnimator.SetTrigger("Attack");
 
         yield return new WaitForSeconds(0.3f);
@@ -141,6 +164,14 @@ public class BattleManager : MonoBehaviour
     IEnumerator ExecuteCombo()
     {
         playerTurn = false;
+        int totalCost = 0;
+
+        foreach(ItemData weapon in selectedWeapons)
+        {
+            totalCost += weapon.energyCost;
+        }
+
+        SpendEnergy(totalCost);
 
         foreach (ItemData weapon in selectedWeapons)
         {
@@ -185,6 +216,7 @@ public class BattleManager : MonoBehaviour
             EndBattle(false);
             return;
         }
+        RegenerateEnergy(1);
 
         playerTurn = true;
     }
@@ -216,5 +248,26 @@ public class BattleManager : MonoBehaviour
     {
         playerHealthSlider.value = playerHP;
         enemyHealthSlider.value = enemyHP;
+    }
+
+    bool HasEnoughEnergy(int cost)
+    {
+        return currentEnergy >= cost;
+    }
+
+    void SpendEnergy(int cost)
+    {
+        currentEnergy -= cost;
+        currentEnergy = Mathf.Max(0, currentEnergy);
+
+        energySlider.value = currentEnergy;
+    }
+
+    void RegenerateEnergy(int amount = 1)
+    {
+        currentEnergy += amount;
+        currentEnergy = Mathf.Min(currentEnergy, maxEnergy);
+
+        energySlider.value = currentEnergy;
     }
 }

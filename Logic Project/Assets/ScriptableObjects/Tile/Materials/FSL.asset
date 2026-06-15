@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ffb03933c9ae5b4e81932d5d97493f6, type: 3}
+  m_Name: FSL
+  m_EditorClassIdentifier: Assembly-CSharp::TileData
+  tileName: FSL
+  type: 0
+  isCoin: 0
+  coinValue: 1
+  sprite: {fileID: 2206319009685084103, guid: 5a6db9bce43a5fb4db1f5ac7507845b4, type: 3}
+  color: {r: 1, g: 1, b: 1, a: 1}
+  maxHP: 0
+  attack: 0
+  itemReward: {fileID: 11400000, guid: 0c6a6e99da2f73344999e6d4d67fab4d, type: 2}

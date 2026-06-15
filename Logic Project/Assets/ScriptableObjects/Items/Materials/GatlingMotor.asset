@@ -10,10 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4f66cfc4b6f90e9418d888677f19a709, type: 3}
-  m_Name: FlailArm
+  m_Name: GatlingMotor
   m_EditorClassIdentifier: Assembly-CSharp::ItemData
-  itemName: Flailarm
-  itemType: 1
-  icon: {fileID: 887848428553443330, guid: 238bae0de5602d44e94848e840b7c68d, type: 3}
-  damage: 20
+  itemName: GM
+  itemType: 0
+  icon: {fileID: -2533642752756409590, guid: 33496b9be0afe784e88339f10a00ac12, type: 3}
+  damage: 0
+  energyCost: 0
   maxDurability: 10
