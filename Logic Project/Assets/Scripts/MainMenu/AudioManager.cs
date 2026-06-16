@@ -9,6 +9,7 @@ public class AudioManager : MonoBehaviour
     public AudioClip GameBGM;
     public AudioClip BossBGM;
     public AudioClip Buttonsfx;
+    public AudioClip Clicksfx;
     public AudioClip[] playerattacksfx;
     public AudioClip[] playerhurtsfx;
     public AudioClip[] enemyattacksfx;
@@ -62,6 +63,11 @@ public class AudioManager : MonoBehaviour
     public void playButtonSFX()
     {
         SFX.PlayOneShot(Buttonsfx);
+    }
+
+    public void playClickSFX()
+    {
+        SFX.PlayOneShot(Clicksfx);
     }
 
     public void playAttackSFX()

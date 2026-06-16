@@ -2439,6 +2439,7 @@ MonoBehaviour:
   GameBGM: {fileID: 8300000, guid: 18dc3cff41ca2de44b54950cbf135152, type: 3}
   BossBGM: {fileID: 8300000, guid: 03ed0cc175fbb0f4f8608322c6151553, type: 3}
   Buttonsfx: {fileID: 8300000, guid: 48915f46d871ee840b5cf8c77773ed4b, type: 3}
+  Clicksfx: {fileID: 8300000, guid: 3858e15c0f4bf5744b363f0e273eee5a, type: 3}
   playerattacksfx:
   - {fileID: 8300000, guid: d71de97aceb6ceb4381771e3e33081bd, type: 3}
   - {fileID: 8300000, guid: b8ae56be180dba145851477ab8a011f5, type: 3}
