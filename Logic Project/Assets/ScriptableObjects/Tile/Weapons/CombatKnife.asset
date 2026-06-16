@@ -14,7 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::TileData
   tileName: CombatKnife
   type: 2
-  sprite: {fileID: -376945165468471503, guid: ec4d60709aab2004fa7fe4e162b75d2a, type: 3}
+  isCoin: 0
+  coinValue: 1
+  sprite: {fileID: -2856358545003148374, guid: 22821572bb197a3468ff37ce6f4d8799, type: 3}
   color: {r: 1, g: 1, b: 1, a: 1}
   maxHP: 0
   attack: 0

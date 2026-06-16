@@ -374,6 +374,8 @@ public class GridManager : MonoBehaviour
 
     IEnumerator EnterBattle()
     {
+        yield return StartCoroutine(TransitionControl.Instance.PlayTransition());
+
         gridRoot.SetActive(false);
         inventory.SetActive(false);
         trash.SetActive(false);
@@ -381,6 +383,8 @@ public class GridManager : MonoBehaviour
         PrepareBattleWeapons();
 
         yield return SceneManager.LoadSceneAsync("Battle Scene", LoadSceneMode.Additive);
+
+        yield return StartCoroutine(TransitionControl.Instance.EndTransition());
     }
 
     public void ReturnFromBattle()
@@ -390,6 +394,8 @@ public class GridManager : MonoBehaviour
 
     IEnumerator ReturnRoutine()
     {
+        yield return StartCoroutine(TransitionControl.Instance.PlayTransition());
+
         yield return SceneManager.UnloadSceneAsync("Battle Scene");
 
         gridRoot.SetActive(true);
@@ -408,6 +414,8 @@ public class GridManager : MonoBehaviour
                 cg.alpha = 1f;
             }
         }
+
+        yield return StartCoroutine(TransitionControl.Instance.EndTransition());
     }
 
     void PrepareBattleWeapons()
