@@ -29,10 +29,6 @@ public class DropTile : MonoBehaviour, IDropHandler
         {
             tileImage.rectTransform.localEulerAngles = Vector3.zero;
         }
-        else
-        {
-            tileImage.rectTransform.localEulerAngles = new Vector3(0, 0, -90);
-        }
     }
 
     public void OnDrop(PointerEventData eventData)

@@ -16,7 +16,7 @@ MonoBehaviour:
   type: 0
   isCoin: 0
   coinValue: 1
-  sprite: {fileID: 1406219538730443254, guid: 62baa3ed84939ea42a520bc83053f827, type: 3}
+  sprite: {fileID: 3552404143158876028, guid: 105d6571aff10654f8f8949ebaae5257, type: 3}
   color: {r: 1, g: 1, b: 1, a: 1}
   maxHP: 0
   attack: 0

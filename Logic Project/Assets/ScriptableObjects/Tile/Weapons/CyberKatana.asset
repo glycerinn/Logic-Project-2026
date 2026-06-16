@@ -14,7 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::TileData
   tileName: CyberKatana
   type: 2
-  sprite: {fileID: 7362911415777394052, guid: 3bd79876ff260674084fd17b57757d88, type: 3}
+  isCoin: 0
+  coinValue: 1
+  sprite: {fileID: -2856358545003148374, guid: 22821572bb197a3468ff37ce6f4d8799, type: 3}
   color: {r: 1, g: 1, b: 1, a: 1}
   maxHP: 0
   attack: 0

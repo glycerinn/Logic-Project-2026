@@ -14,7 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::TileData
   tileName: IH
   type: 0
-  sprite: {fileID: -6696355882703594569, guid: d91447f4aba5c3947b7d496069d3fe44, type: 3}
+  isCoin: 0
+  coinValue: 1
+  sprite: {fileID: 3552404143158876028, guid: 105d6571aff10654f8f8949ebaae5257, type: 3}
   color: {r: 1, g: 1, b: 1, a: 1}
   maxHP: 0
   attack: 0
