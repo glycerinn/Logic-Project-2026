@@ -15,6 +15,6 @@ MonoBehaviour:
   itemName: LS
   itemType: 1
   icon: {fileID: -7970233335868362015, guid: 319aa65c0a5d56044b3646c09bad3b99, type: 3}
-  damage: 50
-  energyCost: 1
+  damage: 300
+  energyCost: 4
   maxDurability: 10

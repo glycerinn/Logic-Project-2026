@@ -15,6 +15,6 @@ MonoBehaviour:
   itemName: MSA
   itemType: 1
   icon: {fileID: 2962393517209532012, guid: 0e17c513d86417a4199af6fedd2235dd, type: 3}
-  damage: 30
-  energyCost: 1
+  damage: 300
+  energyCost: 4
   maxDurability: 10

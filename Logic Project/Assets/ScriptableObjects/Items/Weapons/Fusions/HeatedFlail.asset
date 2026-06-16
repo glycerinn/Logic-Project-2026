@@ -15,6 +15,6 @@ MonoBehaviour:
   itemName: HeatedFlail
   itemType: 1
   icon: {fileID: -2616891375401281822, guid: efab8d23ea150454696aed41aa9a8bd4, type: 3}
-  damage: 60
-  energyCost: 1
+  damage: 300
+  energyCost: 4
   maxDurability: 10

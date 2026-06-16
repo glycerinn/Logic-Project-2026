@@ -15,6 +15,6 @@ MonoBehaviour:
   itemName: Slabcannon
   itemType: 1
   icon: {fileID: -2700439039883030302, guid: 1bec9c41af8345d409e7879cb68ad696, type: 3}
-  damage: 50
-  energyCost: 1
+  damage: 300
+  energyCost: 4
   maxDurability: 10

@@ -15,6 +15,6 @@ MonoBehaviour:
   itemName: Flailarm
   itemType: 1
   icon: {fileID: 887848428553443330, guid: 238bae0de5602d44e94848e840b7c68d, type: 3}
-  damage: 20
-  energyCost: 1
+  damage: 300
+  energyCost: 4
   maxDurability: 10

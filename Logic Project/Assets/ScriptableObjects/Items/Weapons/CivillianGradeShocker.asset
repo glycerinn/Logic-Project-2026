@@ -15,6 +15,6 @@ MonoBehaviour:
   itemName: CGS
   itemType: 1
   icon: {fileID: 274056855454662905, guid: 96d79be0228b6114cadbaaa255d242b6, type: 3}
-  damage: 10
-  energyCost: 1
-  maxDurability: 10
+  damage: 75
+  energyCost: 4
+  maxDurability: 4

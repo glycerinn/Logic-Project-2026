@@ -2,6 +2,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using UnityEngine.SceneManagement;
 using System.Collections.Generic;
 
 public class BattleManager : MonoBehaviour
@@ -25,18 +26,23 @@ public class BattleManager : MonoBehaviour
     private bool playerTurn = true;
     private bool battleEnded;
 
-    private int playerHP = 100;
+    public int playerHP = 100;
     private int enemyHP;
     private int enemyAttack;
-
+    public GameObject continuePanel;
+    public TextMeshProUGUI continueButtonText;
+    private bool playerWonBattle;
     private TileData enemyData;
+
     [Header("Energy")]
     public Slider energySlider;
     public int maxEnergy = 5;
     private int currentEnergy;
+    private AudioManager audioManager;
 
     void Awake()
     {
+        audioManager = GameObject.FindGameObjectWithTag("AudioManager").GetComponent<AudioManager>();
         Instance = this;
     }
 
@@ -69,6 +75,8 @@ public class BattleManager : MonoBehaviour
 
         UpdateUI();
         resultText.text = "";
+
+        continuePanel.SetActive(false);
     }
 
     void Update()
@@ -142,11 +150,14 @@ public class BattleManager : MonoBehaviour
     {
         SpendEnergy(weapon.energyCost);
         playerTurn = false;
+
         playerAnimator.SetTrigger("Attack");
+        audioManager.playAttackSFX();
 
         yield return new WaitForSeconds(0.3f);
 
         enemyAnimator.SetTrigger("EnemyHurt");
+        audioManager.playeHurtSFX();
 
         yield return new WaitForSeconds(0.1f);
 
@@ -181,10 +192,12 @@ public class BattleManager : MonoBehaviour
         foreach (ItemData weapon in selectedWeapons)
         {
             playerAnimator.SetTrigger("Attack");
+            audioManager.playAttackSFX();
 
             yield return new WaitForSeconds(0.3f);
 
             enemyAnimator.SetTrigger("EnemyHurt");
+            audioManager.playeHurtSFX();
 
             yield return new WaitForSeconds(0.1f);
 
@@ -214,8 +227,10 @@ public class BattleManager : MonoBehaviour
             return;
 
         enemyAnimator.SetTrigger("EnemyAttack");
+        audioManager.playeAttackSFX();
 
         playerAnimator.SetTrigger("Hurt");
+        audioManager.playHurtSFX();
 
         playerHP -= enemyAttack;
         playerHP = Mathf.Max(0, playerHP);
@@ -237,21 +252,46 @@ public class BattleManager : MonoBehaviour
     {
         enemyImage.gameObject.SetActive(false);
         EndBattle(true);
-
-        if (GridManager.Instance.finalBattleTriggered)
-        {
-            GridManager.Instance.StartCoroutine(GridManager.Instance.ReturnAndShowVictory());
-        }
-        else
-        {
-            GridManager.Instance.ReturnFromBattle();
-        }
     }
 
     void EndBattle(bool playerWon)
     {
         battleEnded = true;
+        playerWonBattle = playerWon;
+
         resultText.text = playerWon ? "YOU WIN!" : "YOU LOSE!";
+        continueButtonText.text = playerWon ? "Continue" : "Main Menu";
+
+        continuePanel.SetActive(true);
+    }
+
+    public void OnContinueButton()
+    {
+        audioManager.playButtonSFX();
+        if (playerWonBattle)
+        {
+            if (GridManager.Instance.finalBattleTriggered)
+            {
+                GridManager.Instance.StartCoroutine(GridManager.Instance.ReturnAndShowVictory());
+            }
+            else
+            {
+                GridManager.Instance.ReturnFromBattle();
+            }
+        }
+        else
+        {
+            StartCoroutine(Transition());
+        }
+    }
+
+    IEnumerator Transition()
+    {
+        Time.timeScale = 1f;
+        
+        yield return StartCoroutine(TransitionControl.Instance.PlayTransition());
+        SceneManager.LoadScene("Main Menu");
+        yield return StartCoroutine(TransitionControl.Instance.EndTransition());
     }
 
     void UpdateUI()

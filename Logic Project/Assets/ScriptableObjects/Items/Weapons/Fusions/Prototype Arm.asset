@@ -15,6 +15,6 @@ MonoBehaviour:
   itemName: Prototype Arm
   itemType: 1
   icon: {fileID: -5488259934343510855, guid: 2dfe371f74b64354296fdfba2855998b, type: 3}
-  damage: 15
-  energyCost: 1
+  damage: 300
+  energyCost: 4
   maxDurability: 10

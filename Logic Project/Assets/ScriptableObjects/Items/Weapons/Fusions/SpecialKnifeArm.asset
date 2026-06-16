@@ -15,6 +15,6 @@ MonoBehaviour:
   itemName: SKA
   itemType: 1
   icon: {fileID: -7875529888739998290, guid: dae329d8e4b0dba4284d6f1564a8b820, type: 3}
-  damage: 30
-  energyCost: 1
+  damage: 300
+  energyCost: 4
   maxDurability: 10

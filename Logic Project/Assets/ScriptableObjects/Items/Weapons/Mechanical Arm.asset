@@ -15,6 +15,6 @@ MonoBehaviour:
   itemName: Mechanical Arm
   itemType: 1
   icon: {fileID: -8016834694023880453, guid: 475ee7abb9fbca244a8d0331d07508dc, type: 3}
-  damage: 35
-  energyCost: 1
-  maxDurability: 10
+  damage: 150
+  energyCost: 3
+  maxDurability: 7
