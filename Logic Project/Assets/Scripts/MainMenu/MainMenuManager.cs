@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -6,22 +7,21 @@ public class MainMenuManager : MonoBehaviour
     public GameObject MainMenuPanel;
     public GameObject MissionPanel;
     public GameObject CharacterPanel;
+    public Animator animator;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-    
     public void OnPlay()
     {
+        StartCoroutine(LoadNextLevel());
+    }
+    
+
+    IEnumerator LoadNextLevel()
+    {
+        yield return StartCoroutine(TransitionControl.Instance.PlayTransition());
+
         SceneManager.LoadScene("SampleScene");
+
+        yield return StartCoroutine(TransitionControl.Instance.EndTransition());
     }
 
     public void Quit()

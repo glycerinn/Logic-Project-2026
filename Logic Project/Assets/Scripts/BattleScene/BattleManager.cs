@@ -240,9 +240,7 @@ public class BattleManager : MonoBehaviour
 
         if (GridManager.Instance.finalBattleTriggered)
         {
-            GridManager.Instance.StartCoroutine(
-                GridManager.Instance.ReturnAndShowVictory()
-            );
+            GridManager.Instance.StartCoroutine(GridManager.Instance.ReturnAndShowVictory());
         }
         else
         {
