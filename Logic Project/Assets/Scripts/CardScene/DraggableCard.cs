@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
 public class DraggableCard : MonoBehaviour,
@@ -9,6 +10,7 @@ public class DraggableCard : MonoBehaviour,
     public Transform originalParent;
     public Vector2 originalPosition;
     public Transform dragLayer;
+    public Image avatar;
 
     public bool isPlaced = false;
     public bool wasDropped = false;
@@ -25,6 +27,7 @@ public class DraggableCard : MonoBehaviour,
     {
 
         Debug.Log("BEGIN DRAG");
+        avatar.raycastTarget = false;
         audioManager?.playpickupSFX();
         originalParent = transform.parent;
         originalPosition = rectTransform.anchoredPosition;
@@ -59,6 +62,7 @@ public class DraggableCard : MonoBehaviour,
     public void OnEndDrag(PointerEventData eventData)
     {
         audioManager?.playDropSFX();
+        avatar.raycastTarget = true;
         canvasGroup.blocksRaycasts = true;
         canvasGroup.alpha = 1f;
         rectTransform.rotation = Quaternion.identity;

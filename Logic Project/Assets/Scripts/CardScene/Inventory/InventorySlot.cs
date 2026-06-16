@@ -18,6 +18,16 @@ public class InventorySlot : MonoBehaviour
         item = GetComponentInChildren<InventoryItem>();
     }
 
+    void Start()
+    {
+        if (currentItem == null)
+        {
+            Color c = icon.color;
+            c.a = 0f;
+            icon.color = c;
+        }
+    }
+
     public void SetItem(ItemData itemData)
     {
         if (itemData == null)
@@ -30,6 +40,9 @@ public class InventorySlot : MonoBehaviour
         durability = currentItem.maxDurability;
 
         icon.enabled = true;
+        Color c = icon.color;
+        c.a = 1f;
+        icon.color = c;
         icon.sprite = itemData.icon;
 
         item.currentSlot = this;
@@ -44,6 +57,10 @@ public class InventorySlot : MonoBehaviour
     public void RemoveItem()
     {
         currentItem = null;
+
+        Color c = icon.color;
+        c.a = 0f; 
+        icon.color = c;
 
         icon.sprite = null;
         icon.enabled = false;
