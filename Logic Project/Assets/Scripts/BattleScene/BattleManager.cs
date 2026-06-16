@@ -42,7 +42,7 @@ public class BattleManager : MonoBehaviour
 
     void Awake()
     {
-        audioManager = GameObject.FindGameObjectWithTag("AudioManager").GetComponent<AudioManager>();
+        audioManager = GameObject.FindGameObjectWithTag("AudioManager")?.GetComponent<AudioManager>();
         Instance = this;
     }
 
@@ -121,6 +121,8 @@ public class BattleManager : MonoBehaviour
         if (!playerTurn || battleEnded)
             return;
 
+        audioManager?.playClickSFX();
+
         if (!isSelecting)
         {
             if (!HasEnoughEnergy(weapon.energyCost))
@@ -152,12 +154,12 @@ public class BattleManager : MonoBehaviour
         playerTurn = false;
 
         playerAnimator.SetTrigger("Attack");
-        audioManager.playAttackSFX();
+        audioManager?.playAttackSFX();
 
         yield return new WaitForSeconds(0.3f);
 
         enemyAnimator.SetTrigger("EnemyHurt");
-        audioManager.playeHurtSFX();
+        audioManager?.playeHurtSFX();
 
         yield return new WaitForSeconds(0.1f);
 
@@ -192,12 +194,12 @@ public class BattleManager : MonoBehaviour
         foreach (ItemData weapon in selectedWeapons)
         {
             playerAnimator.SetTrigger("Attack");
-            audioManager.playAttackSFX();
+            audioManager?.playAttackSFX();
 
             yield return new WaitForSeconds(0.3f);
 
             enemyAnimator.SetTrigger("EnemyHurt");
-            audioManager.playeHurtSFX();
+            audioManager?.playeHurtSFX();
 
             yield return new WaitForSeconds(0.1f);
 
@@ -227,10 +229,10 @@ public class BattleManager : MonoBehaviour
             return;
 
         enemyAnimator.SetTrigger("EnemyAttack");
-        audioManager.playeAttackSFX();
+        audioManager?.playeAttackSFX();
 
         playerAnimator.SetTrigger("Hurt");
-        audioManager.playHurtSFX();
+        audioManager?.playHurtSFX();
 
         playerHP -= enemyAttack;
         playerHP = Mathf.Max(0, playerHP);
@@ -267,7 +269,7 @@ public class BattleManager : MonoBehaviour
 
     public void OnContinueButton()
     {
-        audioManager.playButtonSFX();
+        audioManager?.playButtonSFX();
         if (playerWonBattle)
         {
             if (GridManager.Instance.finalBattleTriggered)
