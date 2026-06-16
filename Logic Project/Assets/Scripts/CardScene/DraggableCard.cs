@@ -12,9 +12,11 @@ public class DraggableCard : MonoBehaviour,
 
     public bool isPlaced = false;
     public bool wasDropped = false;
+    private AudioManager audioManager;
 
     void Awake()
     {
+        audioManager = GameObject.FindGameObjectWithTag("AudioManager")?.GetComponent<AudioManager>();
         rectTransform = GetComponent<RectTransform>();
         canvasGroup = GetComponent<CanvasGroup>();
     }
@@ -22,6 +24,8 @@ public class DraggableCard : MonoBehaviour,
     public void OnBeginDrag(PointerEventData eventData)
     {
 
+        Debug.Log("BEGIN DRAG");
+        audioManager?.playpickupSFX();
         originalParent = transform.parent;
         originalPosition = rectTransform.anchoredPosition;
         wasDropped = false;
@@ -54,6 +58,7 @@ public class DraggableCard : MonoBehaviour,
 
     public void OnEndDrag(PointerEventData eventData)
     {
+        audioManager?.playDropSFX();
         canvasGroup.blocksRaycasts = true;
         canvasGroup.alpha = 1f;
         rectTransform.rotation = Quaternion.identity;

@@ -15,6 +15,6 @@ MonoBehaviour:
   itemName: Handcannon
   itemType: 1
   icon: {fileID: 8766863098361882804, guid: b4f720c56a322b740851af56f9c5828e, type: 3}
-  damage: 25
-  energyCost: 1
-  maxDurability: 10
+  damage: 150
+  energyCost: 4
+  maxDurability: 5

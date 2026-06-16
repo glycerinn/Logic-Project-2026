@@ -15,6 +15,6 @@ MonoBehaviour:
   itemName: CO
   itemType: 1
   icon: {fileID: -2729456072394133572, guid: 8cd1128fa7bce374e94a243cb239f06e, type: 3}
-  damage: 30
-  energyCost: 1
+  damage: 300
+  energyCost: 4
   maxDurability: 10

@@ -15,6 +15,6 @@ MonoBehaviour:
   itemName: SGD
   itemType: 1
   icon: {fileID: 6566426184622054668, guid: 3e2ffed835ceadc45a963d45e0916051, type: 3}
-  damage: 50
-  energyCost: 1
+  damage: 300
+  energyCost: 4
   maxDurability: 10

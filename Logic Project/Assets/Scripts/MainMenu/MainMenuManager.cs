@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Rendering;
 using UnityEngine.SceneManagement;
 
 public class MainMenuManager : MonoBehaviour
@@ -8,13 +9,34 @@ public class MainMenuManager : MonoBehaviour
     public GameObject MissionPanel;
     public GameObject CharacterPanel;
     public Animator animator;
+    public SettingsManager settingsManager;
+
+    private AudioManager audioManager;
+
+    public void Awake()
+    {
+        audioManager = GameObject.FindGameObjectWithTag("AudioManager").GetComponent<AudioManager>();
+    } 
+
+    public void Start()
+    {
+        settingsManager.loadVolume();
+        AudioManager.instance.playMainMenuBGM();
+        Time.timeScale = 1f;
+    }
 
     public void OnPlay()
     {
+        audioManager.playButtonSFX();
         StartCoroutine(LoadNextLevel());
     }
-    
 
+    public void OnSettings()
+    {
+        audioManager.playButtonSFX();
+        settingsManager.SetUp();
+    }
+    
     IEnumerator LoadNextLevel()
     {
         yield return StartCoroutine(TransitionControl.Instance.PlayTransition());
@@ -26,6 +48,7 @@ public class MainMenuManager : MonoBehaviour
 
     public void Quit()
     {
+        audioManager.playButtonSFX();
         Application.Quit();
     }
 }

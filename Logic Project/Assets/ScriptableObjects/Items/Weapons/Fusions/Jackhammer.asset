@@ -15,6 +15,6 @@ MonoBehaviour:
   itemName: Jackhammer
   itemType: 1
   icon: {fileID: 8675677168784275166, guid: 4c797501b51ff0e4a8d80529e0eac065, type: 3}
-  damage: 45
-  energyCost: 1
+  damage: 300
+  energyCost: 4
   maxDurability: 10

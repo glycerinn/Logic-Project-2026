@@ -44,15 +44,17 @@ public class GridManager : MonoBehaviour
 
     [Header("UI")]
     public Slider progressSlider;
-    
+    private AudioManager audioManager;
 
     void Awake()
     {
+        audioManager = GameObject.FindGameObjectWithTag("AudioManager")?.GetComponent<AudioManager>();
         Instance = this;
     }
 
     void Start()
     {
+        audioManager?.playGameBGM();
         progressSlider.minValue = 0;
         progressSlider.maxValue = maxColumns;
         progressSlider.value = 0;
@@ -374,7 +376,11 @@ public class GridManager : MonoBehaviour
 
     IEnumerator EnterBattle()
     {
-        yield return StartCoroutine(TransitionControl.Instance.PlayTransition());
+        audioManager?.playBossBGM();
+        if (TransitionControl.Instance != null)
+        {
+            yield return StartCoroutine(TransitionControl.Instance.PlayTransition());
+        }
 
         gridRoot.SetActive(false);
         inventory.SetActive(false);
@@ -384,7 +390,10 @@ public class GridManager : MonoBehaviour
 
         yield return SceneManager.LoadSceneAsync("Battle Scene", LoadSceneMode.Additive);
 
-        yield return StartCoroutine(TransitionControl.Instance.EndTransition());
+        if (TransitionControl.Instance != null)
+        {
+            yield return StartCoroutine(TransitionControl.Instance.EndTransition());
+        }
     }
 
     public void ReturnFromBattle()
@@ -394,9 +403,14 @@ public class GridManager : MonoBehaviour
 
     IEnumerator ReturnRoutine()
     {
-        yield return StartCoroutine(TransitionControl.Instance.PlayTransition());
+        if (TransitionControl.Instance != null)
+        {
+            yield return StartCoroutine(TransitionControl.Instance.PlayTransition());
+        }
 
         yield return SceneManager.UnloadSceneAsync("Battle Scene");
+
+        audioManager?.resumeGameBGM();
 
         gridRoot.SetActive(true);
         inventory.SetActive(true);
@@ -415,7 +429,10 @@ public class GridManager : MonoBehaviour
             }
         }
 
-        yield return StartCoroutine(TransitionControl.Instance.EndTransition());
+        if (TransitionControl.Instance != null)
+        {
+            yield return StartCoroutine(TransitionControl.Instance.EndTransition());
+        }
     }
 
     void PrepareBattleWeapons()
@@ -452,6 +469,11 @@ public class GridManager : MonoBehaviour
 
     public IEnumerator ReturnAndShowVictory()
     {
+        if (TransitionControl.Instance != null)
+        {
+            yield return StartCoroutine(TransitionControl.Instance.PlayTransition());
+        }
+
         yield return SceneManager.UnloadSceneAsync("Battle Scene");    
 
         gridRoot.SetActive(true);
@@ -459,6 +481,11 @@ public class GridManager : MonoBehaviour
         trash.SetActive(true);
 
         victoryPanel.SetActive(true);
+
+        if (TransitionControl.Instance != null)
+        {
+            yield return StartCoroutine(TransitionControl.Instance.EndTransition());
+        }
 
         Time.timeScale = 0f;
     }
