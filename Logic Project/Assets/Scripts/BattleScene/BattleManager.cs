@@ -245,7 +245,7 @@ public class BattleManager : MonoBehaviour
             EndBattle(false);
             return;
         }
-        RegenerateEnergy(1);
+        RegenerateEnergy(2);
 
         playerTurn = true;
     }
@@ -315,7 +315,7 @@ public class BattleManager : MonoBehaviour
         energySlider.value = currentEnergy;
     }
 
-    void RegenerateEnergy(int amount = 2)
+    void RegenerateEnergy(int amount)
     {
         currentEnergy += amount;
         currentEnergy = Mathf.Min(currentEnergy, maxEnergy);
