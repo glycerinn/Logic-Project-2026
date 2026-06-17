@@ -69,6 +69,8 @@ public class InventorySlot : MonoBehaviour
         icon.rectTransform.localScale = Vector3.one;
         icon.rectTransform.anchoredPosition = Vector2.zero;
         icon.rectTransform.rotation = Quaternion.identity;
+
+        UpdateDurabilityUI();
     }
 
     public bool IsEmpty()
@@ -79,10 +81,13 @@ public class InventorySlot : MonoBehaviour
     public void CopyFrom(InventorySlot other)
     {
         currentItem = other.currentItem;
+        durability = other.durability;
 
         icon.sprite = other.icon.sprite;
         icon.color = other.icon.color;
         icon.enabled = other.icon.enabled;
+
+        UpdateDurabilityUI();
     }
 
     public void UpdateDurabilityUI()

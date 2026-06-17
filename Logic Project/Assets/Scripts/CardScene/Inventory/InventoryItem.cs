@@ -39,17 +39,32 @@ public class InventoryItem : MonoBehaviour,
         wasDropped = false;
         
         transform.SetParent(dragLayer, false);
+        transform.SetAsLastSibling();
 
         rectTransform.rotation = Quaternion.identity;
         rectTransform.localScale = Vector3.one;
 
         canvasGroup.blocksRaycasts = false;
         canvasGroup.alpha = 0.6f;
+        Debug.Log(canvasGroup.alpha);
+        Debug.Log(rectTransform.position);
     }
 
     public void OnDrag(PointerEventData eventData)
     {
-        rectTransform.position = eventData.position;
+        RectTransform canvasRect =
+            dragLayer.GetComponentInParent<Canvas>().GetComponent<RectTransform>();
+
+        Vector2 localPoint;
+
+        RectTransformUtility.ScreenPointToLocalPointInRectangle(
+            canvasRect,
+            eventData.position,
+            eventData.pressEventCamera,
+            out localPoint
+        );
+
+        rectTransform.anchoredPosition = localPoint;
     }
 
     public void OnEndDrag(PointerEventData eventData)

@@ -36,7 +36,7 @@ public class BattleManager : MonoBehaviour
 
     [Header("Energy")]
     public Slider energySlider;
-    public int maxEnergy = 5;
+    public int maxEnergy = 10;
     private int currentEnergy;
     private AudioManager audioManager;
 
