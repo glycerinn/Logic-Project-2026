@@ -375,6 +375,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Outline
-  m_EffectColor: {r: 0.022012413, g: 1, b: 0.109680526, a: 0.8235294}
-  m_EffectDistance: {x: 10, y: 10}
+  m_EffectColor: {r: 0.022012413, g: 1, b: 0.109680526, a: 0.9764706}
+  m_EffectDistance: {x: 13, y: 13}
   m_UseGraphicAlpha: 1
