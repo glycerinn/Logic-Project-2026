@@ -10,6 +10,7 @@ public class MainMenuManager : MonoBehaviour
     public GameObject CharacterPanel;
     public Animator animator;
     public SettingsManager settingsManager;
+    public CreditsManager credits;
 
     private AudioManager audioManager;
 
@@ -50,5 +51,11 @@ public class MainMenuManager : MonoBehaviour
     {
         audioManager.playButtonSFX();
         Application.Quit();
+    }
+
+    public void onCredits()
+    {
+        audioManager.playButtonSFX();
+        credits.CreditsSetUp();
     }
 }

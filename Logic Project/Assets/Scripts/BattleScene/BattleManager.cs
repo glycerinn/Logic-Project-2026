@@ -315,7 +315,7 @@ public class BattleManager : MonoBehaviour
         energySlider.value = currentEnergy;
     }
 
-    void RegenerateEnergy(int amount = 1)
+    void RegenerateEnergy(int amount = 2)
     {
         currentEnergy += amount;
         currentEnergy = Mathf.Min(currentEnergy, maxEnergy);
