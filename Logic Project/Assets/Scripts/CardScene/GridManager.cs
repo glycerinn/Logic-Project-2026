@@ -16,7 +16,7 @@ public class GridManager : MonoBehaviour
     public int visibleColumns = 6;
     public int maxColumnsLeft = 2;
     private int totalColumnsCreated = 0;
-    public int maxColumns = 10;
+    public int maxColumns = 150;
     private int nextEnemyColumn = 3;
 
     public bool finalBattleTriggered = false;

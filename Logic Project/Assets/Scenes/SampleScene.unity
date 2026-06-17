@@ -2981,7 +2981,7 @@ MonoBehaviour:
   width: 4
   visibleColumns: 15
   maxColumnsLeft: 2
-  maxColumns: 10
+  maxColumns: 150
   finalBattleTriggered: 0
   materialTiles:
   - {fileID: 11400000, guid: 8dd529ec01348f84c9493c79c0ed536a, type: 2}
