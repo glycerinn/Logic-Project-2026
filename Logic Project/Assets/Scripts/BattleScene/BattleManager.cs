@@ -49,7 +49,7 @@ public class BattleManager : MonoBehaviour
     void Start()
     {
         enemyData = BattleData.currentEnemy;
-
+        Debug.Log(currentEnergy);
         if (enemyData != null)
         {
             enemyImage.sprite = enemyData.sprite;
@@ -311,7 +311,7 @@ public class BattleManager : MonoBehaviour
     {
         currentEnergy -= cost;
         currentEnergy = Mathf.Max(0, currentEnergy);
-
+        Debug.Log(currentEnergy);
         energySlider.value = currentEnergy;
     }
 
@@ -319,7 +319,7 @@ public class BattleManager : MonoBehaviour
     {
         currentEnergy += amount;
         currentEnergy = Mathf.Min(currentEnergy, maxEnergy);
-
+        Debug.Log(currentEnergy);
         energySlider.value = currentEnergy;
     }
 }

@@ -1702,7 +1702,7 @@ MonoBehaviour:
   continuePanel: {fileID: 1485923529}
   continueButtonText: {fileID: 6398045}
   energySlider: {fileID: 1213947871}
-  maxEnergy: 5
+  maxEnergy: 10
 --- !u!1 &1240795028
 GameObject:
   m_ObjectHideFlags: 0
