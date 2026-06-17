@@ -36,7 +36,7 @@ public class BattleManager : MonoBehaviour
 
     [Header("Energy")]
     public Slider energySlider;
-    public int maxEnergy = 5;
+    public int maxEnergy = 10;
     private int currentEnergy;
     private AudioManager audioManager;
 
@@ -49,7 +49,7 @@ public class BattleManager : MonoBehaviour
     void Start()
     {
         enemyData = BattleData.currentEnemy;
-
+        Debug.Log(currentEnergy);
         if (enemyData != null)
         {
             enemyImage.sprite = enemyData.sprite;
@@ -245,7 +245,7 @@ public class BattleManager : MonoBehaviour
             EndBattle(false);
             return;
         }
-        RegenerateEnergy(1);
+        RegenerateEnergy(2);
 
         playerTurn = true;
     }
@@ -311,15 +311,15 @@ public class BattleManager : MonoBehaviour
     {
         currentEnergy -= cost;
         currentEnergy = Mathf.Max(0, currentEnergy);
-
+        Debug.Log(currentEnergy);
         energySlider.value = currentEnergy;
     }
 
-    void RegenerateEnergy(int amount = 1)
+    void RegenerateEnergy(int amount)
     {
         currentEnergy += amount;
         currentEnergy = Mathf.Min(currentEnergy, maxEnergy);
-
+        Debug.Log(currentEnergy);
         energySlider.value = currentEnergy;
     }
 }

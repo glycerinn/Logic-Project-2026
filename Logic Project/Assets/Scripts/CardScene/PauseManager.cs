@@ -21,11 +21,17 @@ public class PauseManager : MonoBehaviour
     {
         Time.timeScale = 1f;
         
-        yield return StartCoroutine(TransitionControl.Instance.PlayTransition());
-
+        if (TransitionControl.Instance != null)
+        {
+            yield return StartCoroutine(TransitionControl.Instance.EndTransition());
+        }
+        
         SceneManager.LoadScene("Main Menu");
 
-        yield return StartCoroutine(TransitionControl.Instance.EndTransition());
+        if (TransitionControl.Instance != null)
+        {
+            yield return StartCoroutine(TransitionControl.Instance.EndTransition());
+        }
     }
 
     public void Resume()
