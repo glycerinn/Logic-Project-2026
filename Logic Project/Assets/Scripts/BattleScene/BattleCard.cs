@@ -3,7 +3,7 @@ using UnityEngine.UI;
 using TMPro;
 using UnityEngine.EventSystems;
 
-public class BattleCard : MonoBehaviour, IPointerClickHandler
+public class BattleCard : MonoBehaviour
 {
     public Image icon;
     private ItemData weapon;
@@ -21,13 +21,6 @@ public class BattleCard : MonoBehaviour, IPointerClickHandler
         }
 
         btn.onClick.AddListener(Use);
-
-        Debug.Log("Listener Added");
-    }
-
-    public void OnPointerClick(PointerEventData eventData)
-    {
-        Debug.Log("POINTER HIT CARD");
     }
 
 
@@ -39,7 +32,6 @@ public class BattleCard : MonoBehaviour, IPointerClickHandler
 
     public void Use()
     {
-        Debug.Log("CARD CLICKED");
         BattleManager.Instance.SelectWeapon(weapon);
     }
 }

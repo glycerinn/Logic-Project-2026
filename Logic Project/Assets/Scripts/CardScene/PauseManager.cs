@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 public class PauseManager : MonoBehaviour
 {
     public GameObject pausePanel;
+    private bool isLoading = false;
 
     public void onPause()
     {
@@ -14,6 +15,10 @@ public class PauseManager : MonoBehaviour
 
     public void MainMenu()
     {
+        if (isLoading)
+            return;
+
+        isLoading = true;
         StartCoroutine(Transition());
     }
 

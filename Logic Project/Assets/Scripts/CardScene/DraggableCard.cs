@@ -26,7 +26,6 @@ public class DraggableCard : MonoBehaviour,
     public void OnBeginDrag(PointerEventData eventData)
     {
 
-        Debug.Log("BEGIN DRAG");
         avatar.raycastTarget = false;
         audioManager?.playpickupSFX();
         originalParent = transform.parent;

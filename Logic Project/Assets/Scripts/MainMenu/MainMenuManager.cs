@@ -11,6 +11,7 @@ public class MainMenuManager : MonoBehaviour
     public Animator animator;
     public SettingsManager settingsManager;
     public CreditsManager credits;
+    private bool isLoading = false;
 
     private AudioManager audioManager;
 
@@ -28,6 +29,10 @@ public class MainMenuManager : MonoBehaviour
 
     public void OnPlay()
     {
+        if (isLoading)
+            return;
+
+        isLoading = true;
         audioManager.playButtonSFX();
         StartCoroutine(LoadNextLevel());
     }

@@ -33,6 +33,7 @@ public class BattleManager : MonoBehaviour
     public TextMeshProUGUI continueButtonText;
     private bool playerWonBattle;
     private TileData enemyData;
+    private bool isLoading = false;
 
     [Header("Energy")]
     public Slider energySlider;
@@ -274,7 +275,7 @@ public class BattleManager : MonoBehaviour
         {
             if (GridManager.Instance.finalBattleTriggered)
             {
-                GridManager.Instance.StartCoroutine(GridManager.Instance.ReturnAndShowVictory());
+                GridManager.Instance.ReturnFromBossBattle();
             }
             else
             {
@@ -283,6 +284,10 @@ public class BattleManager : MonoBehaviour
         }
         else
         {
+            if (isLoading)
+                return;
+
+            isLoading = true;
             StartCoroutine(Transition());
         }
     }

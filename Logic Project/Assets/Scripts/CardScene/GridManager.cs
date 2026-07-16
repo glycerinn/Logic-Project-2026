@@ -105,9 +105,10 @@ public class GridManager : MonoBehaviour
 
             tile.tileData = data;
 
-            if (isBossColumn)
+            if (isBossColumn == true)
             {
                 tile.isBossTile = true;
+                Debug.Log("boss");
             }
 
             tile.ApplyVisuals();
@@ -117,7 +118,6 @@ public class GridManager : MonoBehaviour
         columns.Add(newColumn);
 
         totalColumnsCreated++;
-        Debug.Log("Total columns created: " + totalColumnsCreated);
     }
 
 
@@ -212,7 +212,7 @@ public class GridManager : MonoBehaviour
 
             if (slot.durability <= 0)
             {
-                slot.RemoveItem();
+                inventoryManager.RemoveItem(slot.slotIndex);
             }
         }
     }
@@ -267,16 +267,17 @@ public class GridManager : MonoBehaviour
         activeColumn++;
 
         progressSlider.value = totalColumnsCreated - (columns.Count - activeColumn);
-        
+
         if (chosenTile.isBossTile && !finalBattleTriggered)
         {
+            Debug.Log(chosenTile + "is boss tile");
             finalBattleTriggered = true;
             BattleData.currentEnemy = chosenTile.tileData;
             StartCoroutine(EnterBattle());
 
             yield break;
         }
-
+        
         ReduceAllDurability(1);
         UpdateActiveColumn();
 
@@ -340,7 +341,7 @@ public class GridManager : MonoBehaviour
             RectTransform gridRect = gridParent.GetComponent<RectTransform>();
             gridRect.anchoredPosition += new Vector2(cellWidth, 0);
         }
-        Debug.Log("Final battle triggered: " + finalBattleTriggered);
+        
     }
 
 
@@ -351,7 +352,7 @@ public class GridManager : MonoBehaviour
             foreach (DropTile tile in columns[x])
             {
                 tile.isLocked =
-                    (x != activeColumn);
+                    x != activeColumn;
             }
         }
     }
@@ -399,6 +400,11 @@ public class GridManager : MonoBehaviour
     public void ReturnFromBattle()
     {
         StartCoroutine(ReturnRoutine());
+    }
+
+    public void ReturnFromBossBattle()
+    {
+        StartCoroutine(ReturnAndShowVictory());
     }
 
     IEnumerator ReturnRoutine()
